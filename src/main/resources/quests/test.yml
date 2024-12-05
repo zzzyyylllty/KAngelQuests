@@ -1,0 +1,75 @@
+TestQuest:
+  # 任务名称
+  name: '[将装修进行到底!](gradient=#f6d365,#fda085)'
+  description:
+    - '&7不能坏的生命已经是存在的'
+    - '&7所以旧约眼光之所及'
+    - '&7不过是坟墓而已'
+  # 任务的元数据
+  # 与 Chemdah 不同，此处可自由定义
+  meta:
+    Internet: 'saiko!' # 示例自定义，可用于 PAPI 变量等
+    difficulty: 'Easy'
+    category: [ Survival ]
+  # addons系统，类似 Chemdah 的组件
+  addon:
+    gui:
+      # 任务在 GUI 中的材质
+      # 允许使用来自其他插件的物品解析
+      material: IRON_INGOT
+      # 可选项，Custom Model Data
+      model-data: 10001
+      # 是否显示附魔光效
+      glow: false
+      # 可选项，任务在 GUI 中的显示名称，不填写则使用任务名称
+      display-name:
+        standard: '{name}'
+        completed: '{name} &a(已完成)'
+        tracking: '{name} &6(追踪中)'
+        progressing: '{name} &6(进行中)'
+      # 可选项，GUI 任务描述，不填写则使用任务描述
+      display-lore:
+        standard:
+          - '{description}'
+        completed:
+          - '已完成!'
+          - '{description}'
+        tracking:
+          - '追踪中!'
+          - '{description}'
+        progressing:
+          - '进行中!'
+          - '{description}'
+      show: true        # 该任务是否在 GUI 中显示? 如果为 false 不在 GUI 中显示这个任务
+    tasks:
+      1: # 需要按照开始，1起数
+        display:
+          taskname: '破坏钻石块'
+        objectives: # 可填写多个任务
+          - objective: BLOCK_BREAK
+            meta:
+              block: DIAMOND_BLOCK
+            requirements: true # 要求
+            run: tell "Break!" # 任务进度触发增长时执行的kether
+        amount: 10 # 达成目标需要的数量
+        addons:
+          gui:
+            material: GOLD_INGOT # 覆盖默认 addon.
+          dependency:
+            1: # 需要按照顺序，1起数
+              conditions:
+                - operator: '>='
+                  value: '1'
+              quests:
+                - "AnotherQuest.1" # AnotherQuest 的 第一个子任务，使用 0 来代表整个任务
+                - "AnotherAnotherQuest.0" # AnotherAnotherQuest 整个完成
+                - "META.Internet:Saiko" # Internet 为 自定义数据
+          # 需要特定的任务满足条件
+          # 目前即 在给定的两个任务中完成 >= 1 个
+          # 可用运算符 >= == <= > < !=
+          # 可以使用 "META.Difficulty:XXX,TEST_CUSTOM_DATA:XXX,Category:XXX" 按照难度，分类或者additional-data筛选
+          control:
+            1:
+              max-c:
+
+

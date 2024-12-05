@@ -1,0 +1,70 @@
+#   Plugin by AkaCandyKAngel   #
+
+
+TestBlockDestroy: # 任务注册名
+  displayname: '&7测试任务显示名称'
+  displaylore:
+    - '&7测试任务描述'
+  difficulty: 'L1'
+  category: 'misc'
+  display-material: 'BEDROCK' # 任务默认的 MATERIAL
+  display-model: 114514 # 显示的 CustomModelData
+  additional-data:
+    Internet: Saiko # 任务的额外数据，可用于外部变量查询等
+  tasks:
+    1: # 此处自由填写，不用按照顺序
+      objective: BLOCK_BREAK
+      amount: 10
+      meta:
+        BLOCK: 'COAL_ORE'
+        EXP: '>= 1'
+        # 子任务 META 决定了子任务的选项和参数
+        # 只有当事件的 META 与任务匹配时才可推进进度
+        # 例如 BLOCK_BREAK 的 META 有三个: "BLOCK:BLOCK","LOCATION:LOCATION","EXP:INT"
+        # 其中 : 前面的为 META 名称。在此处使用 META 名称来设置任务要求。
+        # 此处即为 破坏 10 个 为 "COAL_ORE" 的方块，且方块的经验数量 >= 1。
+        # 可用的运算符 == != >= <= > < 不填写默认为 ==
+        # 其中，非数字类型只可使用 != ==
+    2:
+      objective: SPECIAL_TRIGGER # 同 Chemdah 的 trigger，可以由指令触发
+      amount: 1
+      requirement: check papi %player_name% is "KAngel"
+        # Kether 要求，必须为 true 才算入任务
+      # Kether 会在其他条件全部满足后执行
+      run: tell Accepted
+        # 当 Kether 要求通过后执行
+
+        # Kether 是 TabooLib 框架中内置的脚本语言，由 海螺先生 创造。
+        # 可以轻松实现诸多功能（如：发送动作栏或标题信息、改变玩家游戏模式、获取变量等等），
+        # 它还拥有良好的拓展 API，能让其他开发者更加轻松地开发出自己的动作语句。
+        # 转自 PTMS WIKI
+      # 文档：https://kether.tabooproject.org/
+    3:
+      objective: ADYESHACH_INTERACT # 同 Chemdah 的 trigger，可以由指令触发
+      amount: 1
+      meta:
+        NPC: Ame_Chan
+        # Kether 要求，必须为 true 才算入任务
+        # Kether 会在其他条件全部满足后执行
+        # Kether 是 TabooLib 框架中内置的脚本语言，由 海螺先生 创造。
+        # 可以轻松实现诸多功能（如：发送动作栏或标题信息、改变玩家游戏模式、获取变量等等），
+        # 它还拥有良好的拓展 API，能让其他开发者更加轻松地开发出自己的动作语句。
+        # 转自 PTMS WIKI
+      # 文档：https://kether.tabooproject.org/
+      addons:
+        depend:
+          1: # 需要按照顺序
+            conditions:
+              - operator: '>='
+                value: '1'
+            quests:
+              - "AnotherQuest.1"
+              - "AnotherAnotherQuest.1"
+              - "META.Internet:Saiko"
+          # 需要特定的任务满足条件
+          # 目前即 在给定的两个任务中完成 >= 1 个
+          # 可用运算符 >= ==
+          # 可以使用 "META.DIFFICULTY:XXX,TEST_CUSTOM_DATA:XXX,CATEGORY:XXX" 按照难度，分类或者additional-data筛选
+        gui:
+          display-material: 'BEDROCK' # 任务达到当前阶段时显示的 MATERIAL
+          display-model: 114514 # 显示的 CustomModelData
