@@ -37,6 +37,9 @@ object MythicMobs {
                 metaList["X:NUMBER"] = e.entity.location.x
                 metaList["Y:NUMBER"] = e.entity.location.y
                 metaList["Z:NUMBER"] = e.entity.location.z
+                metaList["PX:NUMBER"] = p.location.x
+                metaList["PY:NUMBER"] = p.location.y
+                metaList["PZ:NUMBER"] = p.location.z
                 completeTasks(p, ObjectiveType.MYTHICMOBS_KILL, 1, metaList)
             }
         }
@@ -51,6 +54,9 @@ object MythicMobs {
             metaList["X:NUMBER"] = e.activeMob.location.x
             metaList["Y:NUMBER"] = e.activeMob.location.y
             metaList["Z:NUMBER"] = e.activeMob.location.z
+            metaList["PX:NUMBER"] = p.location.x
+            metaList["PY:NUMBER"] = p.location.y
+            metaList["PZ:NUMBER"] = p.location.z
             completeTasks(p, ObjectiveType.MYTHICMOBS_INTERACT, 1, metaList)
         }
     }

@@ -54,6 +54,9 @@ object BlockObjectives {
             metaList["X:NUMBER"] = e.harvestedBlock.location.x
             metaList["Y:NUMBER"] = e.harvestedBlock.location.y
             metaList["Z:NUMBER"] = e.harvestedBlock.location.z
+            metaList["PX:NUMBER"] = p.location.x
+            metaList["PY:NUMBER"] = p.location.y
+            metaList["PZ:NUMBER"] = p.location.z
             metaList["HAND:EQUIPMENTSLOT"] = e.hand.name
             completeTasks(p, ObjectiveType.BLOCK_HARVEST, 1, metaList)
         }
@@ -67,6 +70,9 @@ object BlockObjectives {
             metaList["X:NUMBER"] = e.block.location.x
             metaList["Y:NUMBER"] = e.block.location.y
             metaList["Z:NUMBER"] = e.block.location.z
+            metaList["PX:NUMBER"] = p.location.x
+            metaList["PY:NUMBER"] = p.location.y
+            metaList["PZ:NUMBER"] = p.location.z
             metaList["EXP:INT"] = e.expToDrop
             completeTasks(p, ObjectiveType.BLOCK_BREAK, 1, metaList)
         }
@@ -80,6 +86,9 @@ object BlockObjectives {
             metaList["X:NUMBER"] = e.block.location.x
             metaList["Y:NUMBER"] = e.block.location.y
             metaList["Z:NUMBER"] = e.block.location.z
+            metaList["PX:NUMBER"] = p.location.x
+            metaList["PY:NUMBER"] = p.location.y
+            metaList["PZ:NUMBER"] = p.location.z
             metaList["HAND:EQUIPMENTSLOT"] = e.hand.name
             metaList["ITEMSTACK:ITEM"] = e.itemInHand
             completeTasks(p, ObjectiveType.BLOCK_PLACE, 1, metaList)
@@ -94,6 +103,9 @@ object BlockObjectives {
             metaList["X:NUMBER"] = e.block.location.x
             metaList["Y:NUMBER"] = e.block.location.y
             metaList["Z:NUMBER"] = e.block.location.z
+            metaList["PX:NUMBER"] = p?.location?.x
+            metaList["PY:NUMBER"] = p?.location?.y
+            metaList["PZ:NUMBER"] = p?.location?.z
             metaList["IGNITECAUSE:IGNITECAUSE"] = e.cause.name
             metaList["BLOCK:IGNITINGBLOCK"] = e.ignitingBlock
             completeTasks(p, ObjectiveType.BLOCK_IGNITE, 1, metaList)
@@ -110,6 +122,9 @@ object BlockObjectives {
                 metaList["X:NUMBER"] = block.location.x
                 metaList["Y:NUMBER"] = block.location.y
                 metaList["Z:NUMBER"] = block.location.z
+                metaList["PX:NUMBER"] = p.location.x
+                metaList["PY:NUMBER"] = p.location.y
+                metaList["PZ:NUMBER"] = p.location.z
                 metaList["HAND:EQUIPMENTSLOT"] = e.hand?.name
                 metaList["ITEMSTACK:ITEM"] = e.item
                 metaList["ACTION:ACTION"] = e.action.name

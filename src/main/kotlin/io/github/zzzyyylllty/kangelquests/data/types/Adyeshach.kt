@@ -28,6 +28,9 @@ object AdyeshachQuests {
             metaList["VECTOR:VECTOR"] = e.vector
             metaList["ITEMSTACK:ITEM"] =
                 if (e.isMainHand) e.player.inventory.itemInMainHand else e.player.inventory.itemInOffHand
+            metaList["PX:NUMBER"] = p.location.x
+            metaList["PY:NUMBER"] = p.location.y
+            metaList["PZ:NUMBER"] = p.location.z
             completeTasks(p, ObjectiveType.ADYESHACH_INTERACT, 1, metaList)
         }
     }
