@@ -11,15 +11,15 @@ import taboolib.common.platform.function.submitAsync
 @RuntimeDependency("Adyeshach")
 object AdyeshachQuests {
 
-    @SubscribeEvent
-    fun onAdyeshachNPCInteract(e: AdyeshachEntityInteractEvent) {                         // 关注事件
-        if (KAngelQuests.registeredObjectives.contains(ObjectiveType.ADYESHACH_INTERACT)) // 如果任务中存在此事件
-            onAdyeshachNPCInteract1(e)                                                    // 执行判断
+    @SubscribeEvent                                                                       // =EventHandler+RegisterEvents
+    fun onAdyeshachNPCInteract(e: AdyeshachEntityInteractEvent) {
+        if (KAngelQuests.registeredObjectives.contains(ObjectiveType.ADYESHACH_INTERACT)) // If registered objects contains it
+            onAdyeshachNPCInteract1(e)                                                    // Do
     }
 
     private fun onAdyeshachNPCInteract1(e: AdyeshachEntityInteractEvent) {
 
-        // 发送任务
+        // Send BukkitRunnable
         submitAsync {
             val metaList = LinkedHashMap<String, Any?>()
             val p = e.player

@@ -4,6 +4,7 @@ import org.bukkit.Material
 
 data class Addon(
     val gui: AddonGui,
+    val dependency: ArrayList<AddonDependencySingle>?,
 )
 
 data class AddonGui(
@@ -20,7 +21,7 @@ data class AddonGui(
 )
 
 data class AddonDependencySingle(
-    val condictions: ArrayList<AddonDependencySingleCondition?>?,
+    val conditions: ArrayList<AddonDependencySingleCondition>?,
     val quests: LinkedHashMap<String, Int>,
 )
 

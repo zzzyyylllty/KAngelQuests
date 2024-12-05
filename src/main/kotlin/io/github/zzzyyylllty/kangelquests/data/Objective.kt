@@ -12,4 +12,5 @@ data class Objective(
     val meta: LinkedHashMap<String, Any>,
     val requirement: String?,
     val run: String?,
+    var addon: Addon,
 )

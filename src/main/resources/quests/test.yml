@@ -41,6 +41,10 @@ TestQuest:
           - '进行中!'
           - '{description}'
       show: true        # 该任务是否在 GUI 中显示? 如果为 false 不在 GUI 中显示这个任务
+    control:
+      max-start: 1
+      max-complete: 1
+      max-fail: 1
     tasks:
       1: # 需要按照开始，1起数
         display:
@@ -68,8 +72,8 @@ TestQuest:
           # 目前即 在给定的两个任务中完成 >= 1 个
           # 可用运算符 >= == <= > < !=
           # 可以使用 "META.Difficulty:XXX,TEST_CUSTOM_DATA:XXX,Category:XXX" 按照难度，分类或者additional-data筛选
-          control:
-            1:
-              max-c:
+          kether:
+            on-start: 'tell start!'
+            on-complete:
 
 

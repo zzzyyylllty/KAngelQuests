@@ -14,4 +14,5 @@ data class Task(
     var taskDisplayLore: String?,
     var taskObjectives: ArrayList<Objective>,
     var amount: Number,
+    var addon: Addon,
 )

@@ -3,6 +3,7 @@ package io.github.zzzyyylllty.kangelquests.tasks
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.config
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.questsMap
 import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
+import io.github.zzzyyylllty.kangelquests.data.QuestStat
 import org.bukkit.entity.Player
 import taboolib.common.platform.function.submitAsync
 import taboolib.common.platform.function.warning
@@ -16,7 +17,7 @@ fun completeTasks(p: Player?, objective: ObjectiveType, amount: Number, metaList
 
         val data = questsMap[p]
 
-        if (data == null) { // 如果未找到玩家数据
+        if (data == null) { // If Player data not found
             when (config["debug.no-player-data"]) {
                 "SKIP" -> warning(p.asLangText("DEBUG_NO_PLAYER_DATA_WARN", p.name))
                 "KICK" -> run {
@@ -37,26 +38,41 @@ fun completeTasks(p: Player?, objective: ObjectiveType, amount: Number, metaList
                 val taskKey = rawtask.key
                 val task = rawtask.value
 
+                // If it already completes
                 if (task.goal.toDouble() >= task.progress.toDouble()) break
-                // 如果子任务已完成，则结束当前任务判定
 
-                // TODO 任务依赖
+                val dependency = task.task.addon.dependency
+                if (dependency != null) for (depend in dependency) {
+                    var completedDepends = 0
+                    for (q in depend.quests) {
+                        if (questsMap[p] != null && questsMap[p]?.quests?.keys?.contains(q.key) == true) {
+                            if (q.value == 0) if (questsMap[p]?.quests?.get(q.key)?.questStat == QuestStat.COMPLETED) completedDepends++
+                            else {
+                                val progress = questsMap[p]?.quests?.get(q.key)?.questTasks?.get(q.key)?.progress ?: 0
+                                val goal = questsMap[p]?.quests?.get(q.key)?.questTasks?.get(q.key)?.goal ?: 0
+                                if (goal.toInt() <= progress.toInt()) completedDepends++
+                            }
+                        }
+                    }
+                }
 
                 // TODO
 
                 for (rawObjective in task.task.taskObjectives)
                     for (meta in rawObjective.meta) {
-                        if (metaList[meta.key] != meta.value) return@submitAsync
-                        // META 要求
 
+                        // META
+                        if (metaList[meta.key] != meta.value) return@submitAsync
+
+                        // Kether Requirement
                         if (rawObjective.requirement != null && runKether(
                                 listOf(rawObjective.requirement),
                                 p
                             ).get() as Boolean
                         ) break
-                        // Kether 代理判断
-
-
+                        3
+                        // Kether run
+                        if (rawObjective.run != null) runKether(listOf(rawObjective.run), p).get()
                     }
             }
 
