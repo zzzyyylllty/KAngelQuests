@@ -1,7 +1,6 @@
 package io.github.zzzyyylllty.kangelquests.data.types
 
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.registeredObjectives
-import io.github.zzzyyylllty.kangelquests.KAngelQuests.runningObjectives
 import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
 import io.github.zzzyyylllty.kangelquests.tasks.completeTasks
 import org.bukkit.event.inventory.FurnaceExtractEvent
@@ -17,8 +16,7 @@ object Item {
     }
 
     private fun onItemFurnace1(e: FurnaceExtractEvent) {
-        if (!runningObjectives.contains(e)) submitAsync {
-            runningObjectives.add(e)
+        submitAsync {
             val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
             val block = e.block ?: return@submitAsync

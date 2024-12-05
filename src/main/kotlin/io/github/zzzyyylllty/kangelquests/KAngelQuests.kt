@@ -1,8 +1,8 @@
 package io.github.zzzyyylllty.kangelquests
 
+import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
 import io.github.zzzyyylllty.kangelquests.data.PlayerQuestData
 import org.bukkit.entity.Player
-import org.bukkit.event.Event
 import taboolib.common.platform.Plugin
 import taboolib.common.platform.function.info
 import taboolib.module.configuration.Config
@@ -12,8 +12,8 @@ object KAngelQuests : Plugin() {
 
     lateinit var plugin: KAngelQuests
     lateinit var questsMap: LinkedHashMap<Player, PlayerQuestData>
-    lateinit var registeredObjectives: ArrayList<Event>
-    lateinit var runningObjectives: ArrayList<Event>
+    lateinit var registeredObjectives: ArrayList<ObjectiveType>
+    lateinit var runningObjectives: ArrayList<ObjectiveType>
 
     @Config("config.yml")
     lateinit var config: ConfigFile

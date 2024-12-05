@@ -2,7 +2,6 @@ package io.github.zzzyyylllty.kangelquests.data.types
 
 import ink.ptms.adyeshach.core.event.AdyeshachEntityInteractEvent
 import io.github.zzzyyylllty.kangelquests.KAngelQuests
-import io.github.zzzyyylllty.kangelquests.KAngelQuests.runningObjectives
 import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
 import io.github.zzzyyylllty.kangelquests.tasks.completeTasks
 import taboolib.common.env.RuntimeDependency
@@ -13,14 +12,15 @@ import taboolib.common.platform.function.submitAsync
 object AdyeshachQuests {
 
     @SubscribeEvent
-    fun onAdyeshachNPCInteract(e: AdyeshachEntityInteractEvent) {
-        if (KAngelQuests.registeredObjectives.contains(e))
-            onAdyeshachNPCInteract1(e)
+    fun onAdyeshachNPCInteract(e: AdyeshachEntityInteractEvent) {                         // 关注事件
+        if (KAngelQuests.registeredObjectives.contains(ObjectiveType.ADYESHACH_INTERACT)) // 如果任务中存在此事件
+            onAdyeshachNPCInteract1(e)                                                    // 执行判断
     }
 
     private fun onAdyeshachNPCInteract1(e: AdyeshachEntityInteractEvent) {
-        if (!runningObjectives.contains(e)) submitAsync {
-            runningObjectives.add(e)
+
+        // 发送任务
+        submitAsync {
             val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
             metaList["ID:STRING"] = e.entity.id

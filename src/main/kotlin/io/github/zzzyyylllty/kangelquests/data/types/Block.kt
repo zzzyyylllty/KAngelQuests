@@ -1,7 +1,6 @@
 package io.github.zzzyyylllty.kangelquests.data.types
 
 import io.github.zzzyyylllty.kangelquests.KAngelQuests
-import io.github.zzzyyylllty.kangelquests.KAngelQuests.runningObjectives
 import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
 import io.github.zzzyyylllty.kangelquests.tasks.completeTasks
 import org.bukkit.event.block.BlockBreakEvent
@@ -16,37 +15,13 @@ object BlockObjectives {
 
     @SubscribeEvent
     fun onBlockHarvest(e: PlayerHarvestBlockEvent) {
-        if (KAngelQuests.registeredObjectives.contains(e))
+        if (KAngelQuests.registeredObjectives.contains(ObjectiveType.BLOCK_HARVEST))
             onBlockHarvest1(e)
     }
 
-    @SubscribeEvent
-    fun onBlockBreak(e: BlockBreakEvent) {
-        if (KAngelQuests.registeredObjectives.contains(e))
-            onBlockBreak(e)
-    }
-
-    @SubscribeEvent
-    fun onBlockPlace(e: BlockPlaceEvent) {
-        if (KAngelQuests.registeredObjectives.contains(e))
-            onBlockPlace1(e)
-    }
-
-    @SubscribeEvent
-    fun onBlockIgnite(e: BlockIgniteEvent) {
-        if (KAngelQuests.registeredObjectives.contains(e))
-            onBlockIgnite1(e)
-    }
-
-    @SubscribeEvent
-    fun onBlockInteract(e: PlayerInteractEvent) {
-        if (KAngelQuests.registeredObjectives.contains(e))
-            onBlockInteract1(e)
-    }
 
     private fun onBlockHarvest1(e: PlayerHarvestBlockEvent) {
-        if (!runningObjectives.contains(e)) submitAsync {
-            runningObjectives.add(e)
+        submitAsync {
             val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
             metaList["BLOCK:MATERIAL"] = e.harvestedBlock.type
@@ -61,9 +36,14 @@ object BlockObjectives {
         }
     }
 
+    @SubscribeEvent
+    fun onBlockBreak(e: BlockBreakEvent) {
+        if (KAngelQuests.registeredObjectives.contains(ObjectiveType.BLOCK_BREAK))
+            onBlockBreak(e)
+    }
+
     private fun onBlockBreak1(e: BlockBreakEvent) {
-        if (!runningObjectives.contains(e)) submitAsync {
-            runningObjectives.add(e)
+        submitAsync {
             val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
             metaList["BLOCK:MATERIAL"] = e.block.type
@@ -78,9 +58,13 @@ object BlockObjectives {
         }
     }
 
+    @SubscribeEvent
+    fun onBlockPlace(e: BlockPlaceEvent) {
+        if (KAngelQuests.registeredObjectives.contains(ObjectiveType.BLOCK_PLACE))
+            onBlockPlace1(e)
+    }
     private fun onBlockPlace1(e: BlockPlaceEvent) {
-        if (!runningObjectives.contains(e)) submitAsync {
-            runningObjectives.add(e)
+        submitAsync {
             val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
             metaList["BLOCK:MATERIAL"] = e.block.type
@@ -96,9 +80,13 @@ object BlockObjectives {
         }
     }
 
+    @SubscribeEvent
+    fun onBlockIgnite(e: BlockIgniteEvent) {
+        if (KAngelQuests.registeredObjectives.contains(ObjectiveType.BLOCK_IGNITE))
+            onBlockIgnite1(e)
+    }
     private fun onBlockIgnite1(e: BlockIgniteEvent) {
-        if (!runningObjectives.contains(e)) submitAsync {
-            runningObjectives.add(e)
+        submitAsync {
             val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
             metaList["BLOCK:MATERIAL"] = e.block.type
@@ -114,9 +102,15 @@ object BlockObjectives {
         }
     }
 
+
+    @SubscribeEvent
+    fun onBlockInteract(e: PlayerInteractEvent) {
+        if (KAngelQuests.registeredObjectives.contains(ObjectiveType.BLOCK_INTERACT))
+            onBlockInteract1(e)
+    }
+
     private fun onBlockInteract1(e: PlayerInteractEvent) {
-        if (!runningObjectives.contains(e)) submitAsync {
-            runningObjectives.add(e)
+        submitAsync {
             val metaList = LinkedHashMap<String, Any?>()
             if (e.clickedBlock != null) {
                 val p = e.player

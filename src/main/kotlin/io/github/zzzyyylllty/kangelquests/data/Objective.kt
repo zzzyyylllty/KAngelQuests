@@ -4,7 +4,7 @@ data class Objective(
     /*
     * 静态目标
     *
-    * Objective       任务类型，形如 Objective.BLOCK_BREAK。
+    * Objective       任务类型，形如 ObjectiveType.BLOCK_BREAK。
     * Meta            目标元数据，形如 Key:"BLOCK" Value:"COAL_ORE" 。
     *
     * */
