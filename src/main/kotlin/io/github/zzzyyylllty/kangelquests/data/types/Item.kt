@@ -11,7 +11,7 @@ object Item {
 
     @SubscribeEvent
     fun onItemFurnace(e: FurnaceExtractEvent) {
-        if (registeredObjectives.contains(e))
+        if (registeredObjectives.contains(ObjectiveType.ITEM_FURNACE))
             onItemFurnace1(e)
     }
 
