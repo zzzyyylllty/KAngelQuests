@@ -1,5 +1,7 @@
 package io.github.zzzyyylllty.kangelquests.data.types
 
+import io.github.zzzyyylllty.kangelquests.KAngelQuests
+import io.github.zzzyyylllty.kangelquests.KAngelQuests.runningObjectives
 import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
 import io.github.zzzyyylllty.kangelquests.tasks.completeTasks
 import org.bukkit.event.block.BlockBreakEvent
@@ -16,7 +18,37 @@ object BlockObjectives {
 
     @SubscribeEvent
     fun onBlockHarvest(e: PlayerHarvestBlockEvent) {
-        submitAsync {
+        if (KAngelQuests.registeredObjectives.contains(e))
+            onBlockHarvest1(e)
+    }
+
+    @SubscribeEvent
+    fun onBlockBreak(e: BlockBreakEvent) {
+        if (KAngelQuests.registeredObjectives.contains(e))
+            onBlockBreak(e)
+    }
+
+    @SubscribeEvent
+    fun onBlockPlace(e: BlockPlaceEvent) {
+        if (KAngelQuests.registeredObjectives.contains(e))
+            onBlockPlace1(e)
+    }
+
+    @SubscribeEvent
+    fun onBlockIgnite(e: BlockIgniteEvent) {
+        if (KAngelQuests.registeredObjectives.contains(e))
+            onBlockIgnite1(e)
+    }
+
+    @SubscribeEvent
+    fun onBlockInteract(e: PlayerInteractEvent) {
+        if (KAngelQuests.registeredObjectives.contains(e))
+            onBlockInteract1(e)
+    }
+
+    private fun onBlockHarvest1(e: PlayerHarvestBlockEvent) {
+        if (!runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
             val p = e.player
             metaList["BLOCK:BLOCK"] = e.harvestedBlock
             metaList["X:NUMBER"] = e.harvestedBlock.location.x
@@ -27,9 +59,9 @@ object BlockObjectives {
         }
     }
 
-    @SubscribeEvent
-    fun onBlockBreak(e: BlockBreakEvent) {
-        submitAsync {
+    private fun onBlockBreak1(e: BlockBreakEvent) {
+        if (!runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
             val p = e.player
             metaList["BLOCK:BLOCK"] = e.block
             metaList["X:NUMBER"] = e.block.location.x
@@ -40,9 +72,9 @@ object BlockObjectives {
         }
     }
 
-    @SubscribeEvent
-    fun onBlockPlace(e: BlockPlaceEvent) {
-        submitAsync {
+    private fun onBlockPlace1(e: BlockPlaceEvent) {
+        if (!runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
             val p = e.player
             metaList["BLOCK:BLOCK"] = e.block
             metaList["X:NUMBER"] = e.block.location.x
@@ -54,9 +86,9 @@ object BlockObjectives {
         }
     }
 
-    @SubscribeEvent
-    fun onBlockIgnite(e: BlockIgniteEvent) {
-        submitAsync {
+    private fun onBlockIgnite1(e: BlockIgniteEvent) {
+        if (!runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
             val p = e.player
             metaList["BLOCK:BLOCK"] = e.block
             metaList["X:NUMBER"] = e.block.location.x
@@ -68,20 +100,21 @@ object BlockObjectives {
         }
     }
 
-    @SubscribeEvent
-    fun onBlockInteract(e: PlayerInteractEvent) {
-        if (e.clickedBlock == null) return
-        submitAsync {
-            val p = e.player
-            val block = e.clickedBlock ?: return@submitAsync
-            metaList["BLOCK:BLOCK"] = block
-            metaList["X:NUMBER"] = block.location.x
-            metaList["Y:NUMBER"] = block.location.y
-            metaList["Z:NUMBER"] = block.location.z
-            metaList["HAND:EQUIPMENTSLOT"] = e.hand?.name
-            metaList["ITEMSTACK:ITEM"] = e.item
-            metaList["ACTION:ACTION"] = e.action.name
-            completeTasks(p, ObjectiveType.BLOCK_INTERACT, 1, metaList)
+    private fun onBlockInteract1(e: PlayerInteractEvent) {
+        if (!runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
+            if (e.clickedBlock != null) {
+                val p = e.player
+                val block = e.clickedBlock ?: return@submitAsync
+                metaList["BLOCK:BLOCK"] = block
+                metaList["X:NUMBER"] = block.location.x
+                metaList["Y:NUMBER"] = block.location.y
+                metaList["Z:NUMBER"] = block.location.z
+                metaList["HAND:EQUIPMENTSLOT"] = e.hand?.name
+                metaList["ITEMSTACK:ITEM"] = e.item
+                metaList["ACTION:ACTION"] = e.action.name
+                completeTasks(p, ObjectiveType.BLOCK_INTERACT, 1, metaList)
+            }
         }
     }
 

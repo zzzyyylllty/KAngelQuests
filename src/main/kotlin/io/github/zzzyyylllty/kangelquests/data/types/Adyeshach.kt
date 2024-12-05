@@ -1,6 +1,8 @@
 package io.github.zzzyyylllty.kangelquests.data.types
 
 import ink.ptms.adyeshach.core.event.AdyeshachEntityInteractEvent
+import io.github.zzzyyylllty.kangelquests.KAngelQuests
+import io.github.zzzyyylllty.kangelquests.KAngelQuests.runningObjectives
 import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
 import io.github.zzzyyylllty.kangelquests.tasks.completeTasks
 import taboolib.common.env.RuntimeDependency
@@ -14,7 +16,13 @@ object AdyeshachQuests {
 
     @SubscribeEvent
     fun onAdyeshachNPCInteract(e: AdyeshachEntityInteractEvent) {
-        submitAsync {
+        if (KAngelQuests.registeredObjectives.contains(e))
+            onAdyeshachNPCInteract1(e)
+    }
+
+    fun onAdyeshachNPCInteract1(e: AdyeshachEntityInteractEvent) {
+        if (!KAngelQuests.runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
             val p = e.player
             metaList["ID:STRING"] = e.entity.id
             metaList["VECTOR:VECTOR"] = e.vector

@@ -25,6 +25,7 @@ enum class ObjectiveType /* (metaSections: List<String>?) */ {
     PLAYER_PERMISSION,
     PLAYER_FISH,
     PLAYER_CHAT,
+    PLAYER_SYNCCHAT,
     PLAYER_CHANGEWORLD,
     PLAYER_KILLMOB,
     PLAYER_DEATH,
