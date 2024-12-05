@@ -14,8 +14,6 @@ import taboolib.common.platform.function.submitAsync
 
 object BlockObjectives {
 
-    private var metaList = LinkedHashMap<String, Any?>()
-
     @SubscribeEvent
     fun onBlockHarvest(e: PlayerHarvestBlockEvent) {
         if (KAngelQuests.registeredObjectives.contains(e))
@@ -49,8 +47,9 @@ object BlockObjectives {
     private fun onBlockHarvest1(e: PlayerHarvestBlockEvent) {
         if (!runningObjectives.contains(e)) submitAsync {
             runningObjectives.add(e)
+            val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
-            metaList["BLOCK:BLOCK"] = e.harvestedBlock
+            metaList["BLOCK:MATERIAL"] = e.harvestedBlock.type
             metaList["X:NUMBER"] = e.harvestedBlock.location.x
             metaList["Y:NUMBER"] = e.harvestedBlock.location.y
             metaList["Z:NUMBER"] = e.harvestedBlock.location.z
@@ -65,8 +64,9 @@ object BlockObjectives {
     private fun onBlockBreak1(e: BlockBreakEvent) {
         if (!runningObjectives.contains(e)) submitAsync {
             runningObjectives.add(e)
+            val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
-            metaList["BLOCK:BLOCK"] = e.block
+            metaList["BLOCK:MATERIAL"] = e.block.type
             metaList["X:NUMBER"] = e.block.location.x
             metaList["Y:NUMBER"] = e.block.location.y
             metaList["Z:NUMBER"] = e.block.location.z
@@ -81,8 +81,9 @@ object BlockObjectives {
     private fun onBlockPlace1(e: BlockPlaceEvent) {
         if (!runningObjectives.contains(e)) submitAsync {
             runningObjectives.add(e)
+            val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
-            metaList["BLOCK:BLOCK"] = e.block
+            metaList["BLOCK:MATERIAL"] = e.block.type
             metaList["X:NUMBER"] = e.block.location.x
             metaList["Y:NUMBER"] = e.block.location.y
             metaList["Z:NUMBER"] = e.block.location.z
@@ -90,7 +91,7 @@ object BlockObjectives {
             metaList["PY:NUMBER"] = p.location.y
             metaList["PZ:NUMBER"] = p.location.z
             metaList["HAND:EQUIPMENTSLOT"] = e.hand.name
-            metaList["ITEMSTACK:ITEM"] = e.itemInHand
+            metaList["ITEMSTACK:MATERIAL"] = e.itemInHand
             completeTasks(p, ObjectiveType.BLOCK_PLACE, 1, metaList)
         }
     }
@@ -98,8 +99,9 @@ object BlockObjectives {
     private fun onBlockIgnite1(e: BlockIgniteEvent) {
         if (!runningObjectives.contains(e)) submitAsync {
             runningObjectives.add(e)
+            val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
-            metaList["BLOCK:BLOCK"] = e.block
+            metaList["BLOCK:MATERIAL"] = e.block.type
             metaList["X:NUMBER"] = e.block.location.x
             metaList["Y:NUMBER"] = e.block.location.y
             metaList["Z:NUMBER"] = e.block.location.z
@@ -115,10 +117,11 @@ object BlockObjectives {
     private fun onBlockInteract1(e: PlayerInteractEvent) {
         if (!runningObjectives.contains(e)) submitAsync {
             runningObjectives.add(e)
+            val metaList = LinkedHashMap<String, Any?>()
             if (e.clickedBlock != null) {
                 val p = e.player
                 val block = e.clickedBlock ?: return@submitAsync
-                metaList["BLOCK:BLOCK"] = block
+                metaList["BLOCK:MATERIAL"] = block.type
                 metaList["X:NUMBER"] = block.location.x
                 metaList["Y:NUMBER"] = block.location.y
                 metaList["Z:NUMBER"] = block.location.z
@@ -126,11 +129,12 @@ object BlockObjectives {
                 metaList["PY:NUMBER"] = p.location.y
                 metaList["PZ:NUMBER"] = p.location.z
                 metaList["HAND:EQUIPMENTSLOT"] = e.hand?.name
-                metaList["ITEMSTACK:ITEM"] = e.item
+                metaList["ITEMSTACK:MATERIAL"] = e.item
                 metaList["ACTION:ACTION"] = e.action.name
                 completeTasks(p, ObjectiveType.BLOCK_INTERACT, 1, metaList)
             }
         }
     }
+
 
 }

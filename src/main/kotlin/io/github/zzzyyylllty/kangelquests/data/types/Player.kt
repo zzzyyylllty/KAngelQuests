@@ -16,7 +16,6 @@ import taboolib.platform.util.killer
 object Player {
 
 
-    private var metaList = LinkedHashMap<String, Any?>()
 
     @SubscribeEvent
     fun onPlayerFish(e: PlayerFishEvent) {
@@ -27,6 +26,7 @@ object Player {
     private fun onPlayerFish1(e: PlayerFishEvent) {
         if (!runningObjectives.contains(e)) submitAsync {
             runningObjectives.add(e)
+            val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
             metaList["ENTITY:ENTITYTYPE"] = e.caught?.type
             metaList["PX:NUMBER"] = p.location.x
@@ -44,7 +44,9 @@ object Player {
     }
 
     private fun onPlayerChat1(e: PlayerChatEvent) {
-        submitAsync {
+        if (!runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
+            val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
             metaList["MESSAGE:STRING"] = e.message
             metaList["PX:NUMBER"] = p.location.x
@@ -61,7 +63,9 @@ object Player {
     }
 
     private fun onPlayerSyncChat1(e: PlayerChatEvent) {
-        submitAsync {
+        if (!runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
+            val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
             metaList["MESSAGE:STRING"] = e.message
             metaList["PX:NUMBER"] = p.location.x
@@ -78,7 +82,9 @@ object Player {
     }
 
     private fun onPlayerChangeWorld1(e: PlayerChangedWorldEvent) {
-        submitAsync {
+        if (!runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
+            val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
             metaList["FROM:STRING"] = e.from.name
             metaList["PX:NUMBER"] = p.location.x
@@ -95,7 +101,9 @@ object Player {
     }
 
     private fun onPlayerKillMob1(e: EntityDeathEvent) {
-        submitAsync {
+        if (!runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
+            val metaList = LinkedHashMap<String, Any?>()
             val p = e.killer as Player
             metaList["ENTITYTYPE"] = e.entityType
             metaList["PX:NUMBER"] = p.location.x
@@ -104,5 +112,6 @@ object Player {
             completeTasks(p, ObjectiveType.PLAYER_SYNCCHAT, 1, metaList)
         }
     }
+
 
 }

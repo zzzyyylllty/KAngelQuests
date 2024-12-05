@@ -1,7 +1,8 @@
-package io.github.zzzyyylllty.kangelquests.data.types
+package io.github.zzzyyylllty.data.types
 
 
-import io.github.zzzyyylllty.kangelquests.KAngelQuests
+import io.github.zzzyyylllty.kangelquests.KAngelQuests.registeredObjectives
+import io.github.zzzyyylllty.kangelquests.KAngelQuests.runningObjectives
 import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
 import io.github.zzzyyylllty.kangelquests.tasks.completeTasks
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent
@@ -17,19 +18,19 @@ object MythicMobs {
     private var metaList = LinkedHashMap<String, Any?>()
     @SubscribeEvent
     fun onMythicMobsMobKill(e: MythicMobDeathEvent) {
-        if (KAngelQuests.registeredObjectives.contains(e))
+        if (registeredObjectives.contains(e))
             onMythicMobsMobKill1(e)
     }
 
     @SubscribeEvent
     fun onMythicMobsMobKill(e: MythicMobInteractEvent) {
-        if (KAngelQuests.registeredObjectives.contains(e))
+        if (registeredObjectives.contains(e))
             onMythicMobsMobInteract1(e)
     }
 
     private fun onMythicMobsMobKill1(e: MythicMobDeathEvent) {
-        if (!KAngelQuests.runningObjectives.contains(e)) submitAsync {
-            KAngelQuests.runningObjectives.add(e)
+        if (!runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
             if (e.killer is Player) {
                 val p = e.killer as Player
                 metaList["NAME:STRING"] = e.mobType.internalName
@@ -46,8 +47,8 @@ object MythicMobs {
     }
 
     private fun onMythicMobsMobInteract1(e: MythicMobInteractEvent) {
-        if (!KAngelQuests.runningObjectives.contains(e)) submitAsync {
-            KAngelQuests.runningObjectives.add(e)
+        if (!runningObjectives.contains(e)) submitAsync {
+            runningObjectives.add(e)
             val p = e.player
             metaList["NAME:STRING"] = e.activeMobType.internalName
             metaList["MOBLEVEL:NUMBER"] = e

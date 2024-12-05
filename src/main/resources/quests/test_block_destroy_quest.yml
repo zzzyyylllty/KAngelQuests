@@ -20,7 +20,7 @@ TestBlockDestroy: # 任务注册名
         EXP: '>= 1'
         # 子任务 META 决定了子任务的选项和参数
         # 只有当事件的 META 与任务匹配时才可推进进度
-        # 例如 BLOCK_BREAK 的 META 有三个: "BLOCK:BLOCK","LOCATION:LOCATION","EXP:INT"
+        # 例如 BLOCK_BREAK 的 META 有三个: "BLOCK:MATERIAL","LOCATION:LOCATION","EXP:INT"
         # 其中 : 前面的为 META 名称。在此处使用 META 名称来设置任务要求。
         # 此处即为 破坏 10 个 为 "COAL_ORE" 的方块，且方块的经验数量 >= 1。
         # 可用的运算符 == != >= <= > < 不填写默认为 ==
