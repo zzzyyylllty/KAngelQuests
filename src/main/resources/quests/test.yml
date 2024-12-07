@@ -46,7 +46,7 @@ TestQuest:
       max-complete: 1
       max-fail: 1
     tasks:
-      1: # 需要按照开始，1起数
+      1: # 需要按照顺序，1起数
         display:
           taskname: '破坏钻石块'
         objectives: # 可填写多个任务

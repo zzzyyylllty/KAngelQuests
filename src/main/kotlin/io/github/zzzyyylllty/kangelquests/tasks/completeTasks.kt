@@ -68,15 +68,13 @@ fun completeTasks(p: Player?, objective: ObjectiveType, amount: Number, metaList
                         if (rawObjective.requirement != null && runKether(
                                 listOf(rawObjective.requirement),
                                 p
-                            ).get() as Boolean
+                            ).get() as Boolean? == false
                         ) break
-                        3
+
                         // Kether run
                         if (rawObjective.run != null) runKether(listOf(rawObjective.run), p).get()
                     }
             }
-
-
         }
     }
 }
