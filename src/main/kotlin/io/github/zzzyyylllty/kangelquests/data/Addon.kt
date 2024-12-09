@@ -4,7 +4,7 @@ import org.bukkit.Material
 
 data class Addon(
     val gui: AddonGui,
-    val dependency: ArrayList<AddonDependencySingle>?,
+    val dependency: ArrayList<AddonDependencySingle>,
 )
 
 data class AddonGui(
@@ -13,20 +13,20 @@ data class AddonGui(
     val nameProgressing: String?,
     val nameTracking: String?,
     val nameCompleted: String?,
-    val loreeStandard: ArrayList<String?>?,
-    val loreProgressing: ArrayList<String?>?,
-    val loreTracking: ArrayList<String?>?,
-    val loreCompleted: ArrayList<String?>?,
+    val loreeStandard: ArrayList<String?>,
+    val loreProgressing: ArrayList<String?>,
+    val loreTracking: ArrayList<String?>,
+    val loreCompleted: ArrayList<String?>,
     val show: Boolean = false,
 )
 
 data class AddonDependencySingle(
-    val conditions: ArrayList<AddonDependencySingleCondition>?,
+    val conditions: ArrayList<AddonDependencySingleCondition>,
     val quests: LinkedHashMap<String, Int>,
 )
 
 data class AddonDependencySingleCondition(
-    val operator: String?,
+    val dependencyOperator: String?,
     val value: Int?,
 )
 

@@ -5,6 +5,6 @@ import taboolib.common.platform.event.SubscribeEvent
 import taboolib.common.platform.function.submitAsync
 
 @SubscribeEvent
-fun onBlockJoinLoadData(e: PlayerJoinEvent) {
+fun onPlayerJoinLoadData(e: PlayerJoinEvent) {
     submitAsync {}
 }
