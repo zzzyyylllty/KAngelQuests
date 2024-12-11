@@ -5,3 +5,5 @@ DEBUG_NO_PLAYER_DATA_KICK: '发生了一个意外错误! KAngelQuests 无法找�
 
 LOG_START: '正在启动 KAngelQuests ...'
 LOG_READ_START: '开始读取任务 请稍后...'
+
+COMMAND_NO_PARAMS: '命令缺少参数 {0}.'
