@@ -42,7 +42,7 @@ fun completeTasks(p: Player?, objective: ObjectiveType, amount: Number, metaList
                 if (task.goal.toDouble() >= task.progress.toDouble()) break
 
                 val dependency = task.task.addon.dependency
-                if (dependency != null) for (depend in dependency) {
+                for (depend in dependency) {
                     var completedDepends = 0
                     for (q in depend.quests) {
                         if (questsMap[p] != null && questsMap[p]?.quests?.keys?.contains(q.key) == true) {
