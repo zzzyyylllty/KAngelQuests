@@ -1,7 +1,7 @@
 package io.github.zzzyyylllty.kangelquests.data
 
 enum class QuestStat {
-    LOCKED,
+    INACTIVE,
     ACTIVE,
     COMPLETED,
     FAILED

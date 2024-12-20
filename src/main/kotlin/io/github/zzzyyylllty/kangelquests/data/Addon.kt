@@ -5,6 +5,7 @@ import org.bukkit.Material
 data class Addon(
     val gui: AddonGui,
     val dependency: ArrayList<AddonDependencySingle>,
+    val agent: Agent,
 )
 
 data class AddonGui(
@@ -28,5 +29,12 @@ data class AddonDependencySingle(
 data class AddonDependencySingleCondition(
     val dependencyOperator: String?,
     val value: Int?,
+)
+
+data class Agent(
+    val onComplete: String?,
+    val onFail: String?,
+    val onAccept: String?,
+    val onRestart: String?,
 )
 

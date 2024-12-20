@@ -2,7 +2,7 @@ package io.github.zzzyyylllty.kangelquests.data.kether
 
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.questsMap
 import io.github.zzzyyylllty.kangelquests.data.QuestStat
-import io.github.zzzyyylllty.kangelquests.tasks.debugger.maniuallyCompleteTask
+import io.github.zzzyyylllty.tasks.debugger.maniuallyCompleteTask
 import org.bukkit.entity.Player
 import taboolib.common.util.isPlayer
 import taboolib.module.kether.*
@@ -18,17 +18,26 @@ fun parser1() = scriptParser {
                 if (sender.isPlayer()) questsMap[sender as Player]?.quests?.get(q)?.questStat = QuestStat.ACTIVE
             }
         }
-        case("lock") {
+        case("lock", "unaccept", "unactive", "inactive") {
             val q = it.nextToken()
             actionNow {
-                val sender = script().sender
-                if (sender.isPlayer()) questsMap[sender as Player]?.quests?.get(q)?.questStat = QuestStat.ACTIVE
+                if (script().sender !is Player) return@actionNow null else return@actionNow maniuallyCompleteTask(
+                    "lock",
+                    nextToken().split(".")[0],
+                    nextToken().split(".")[1],
+                    script().sender
+                )
             }
         }
         case("complete", "done", "finish") {
             val q = it.nextToken()
             actionNow {
-                if (script().sender !is Player) return@actionNow null else return@actionNow maniuallyCompleteTask("complete")
+                if (script().sender !is Player) return@actionNow null else return@actionNow maniuallyCompleteTask(
+                    "complete",
+                    nextToken().split(".")[0],
+                    nextToken().split(".")[1],
+                    script().sender
+                )
             }
         }
         case("slientcomplete") {

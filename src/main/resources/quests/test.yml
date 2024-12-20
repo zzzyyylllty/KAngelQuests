@@ -11,7 +11,7 @@ TestQuest:
     Internet: 'saiko!' # 示例自定义，可用于 PAPI 变量等
     difficulty: 'Easy'
     category: [ Survival ]
-  # addons系统，类似 Chemdah 的组件
+  # component系统，类似 Chemdah 的组件
   addon:
     gui:
       # 任务在 GUI 中的材质
@@ -56,9 +56,12 @@ TestQuest:
             requirements: true # 要求
             run: tell "Break!" # 任务进度触发增长时执行的kether
         amount: 10 # 达成目标需要的数量
-        addons:
+        component:
           gui:
             material: GOLD_INGOT # 覆盖默认 addon.
+          extra:
+            force-success: check papi %player_name% is "Ame-Chan" # 当满足某个Kether条件后强制完成任务
+            force-restart: ~ # 等同于 Chemdah 的重置
           dependency:
             1: # 需要按照顺序，1起数
               conditions:
@@ -73,10 +76,9 @@ TestQuest:
           # 可用运算符 >= == <= > < !=
           # 可以使用 "META.Difficulty:XXX,TEST_CUSTOM_DATA:XXX,Category:XXX" 按照难度，分类或者additional-data筛选
           kether:
-            on-start: 'tell 已开始任务:%quest_name%!'
+            on-accept: 'tell 已开始任务:%quest_name%!'
             on-complete: 'tell %quest_name% completed!'
             on-fail: ~
-            on-timeout: ~ # Timeout 覆盖 Fail
             on-restart: ~
 
 

@@ -10,4 +10,5 @@ class ActiveTask(
     val task: Task,
     var progress: Number,
     var goal: Number,
+    var addon: Addon,
 )

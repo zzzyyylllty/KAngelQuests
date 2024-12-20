@@ -16,4 +16,5 @@ data class ActiveQuest(
     var questCategory: String,
     var questMetas: LinkedHashMap<String, Any>,
     var questTasks: LinkedHashMap<String, ActiveTask>,
+    var addon: Addon,
 )

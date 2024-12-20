@@ -18,4 +18,5 @@ enum class Quest(
     var questCategory: String,
     var questMetas: LinkedHashMap<String, Any>,
     var questTasks: LinkedHashMap<String, Task>,
+    var addon: Addon,
 )
