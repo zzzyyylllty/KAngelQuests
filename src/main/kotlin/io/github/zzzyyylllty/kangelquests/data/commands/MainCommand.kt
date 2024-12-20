@@ -1,7 +1,6 @@
 package io.github.zzzyyylllty.kangelquests.data.commands
 
 import io.github.zzzyyylllty.kangelquests.tasks.returnPlayerOnlyTargetSelector
-import io.github.zzzyyylllty.kangelquests.tasks.runKether
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -28,24 +27,10 @@ object MainCommand {
                             for (p in Bukkit.selectEntities(sender, context["players"])) {
                                 if (p is Player) {
                                     val q = context["players"]
-                                    if (context["modify"].startsWith("quest:")) runKether(
-                                        listOf(
-                                            "kquest quest complete ${
-                                                context["modify".substring(
-                                                    6
-                                                )]
-                                            }"
-                                        ), p
-                                    )
-                                    if (context["modify"].startsWith("task:")) runKether(
-                                        listOf(
-                                            "kquest quest complete ${
-                                                context["modify".substring(
-                                                    5
-                                                )]
-                                            }"
-                                        ), p
-                                    )
+                                    if (context["modify"].startsWith("quest:"))
+
+                                        if (context["modify"].startsWith("task:"))
+
                                 } else {
                                     warning("目标选择器 ${context["players"]} 其中有部分结果不是玩家，已跳过。")
                                 }

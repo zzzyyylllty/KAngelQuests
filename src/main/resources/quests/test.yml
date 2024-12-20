@@ -73,7 +73,10 @@ TestQuest:
           # 可用运算符 >= == <= > < !=
           # 可以使用 "META.Difficulty:XXX,TEST_CUSTOM_DATA:XXX,Category:XXX" 按照难度，分类或者additional-data筛选
           kether:
-            on-start: 'tell start!'
-            on-complete:
+            on-start: 'tell 已开始任务:%quest_name%!'
+            on-complete: 'tell %quest_name% completed!'
+            on-fail: ~
+            on-timeout: ~ # Timeout 覆盖 Fail
+            on-restart: ~
 
 

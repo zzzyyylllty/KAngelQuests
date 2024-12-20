@@ -4,6 +4,7 @@ enum class QuestStat {
     LOCKED,
     ACTIVE,
     COMPLETED,
+    FAILED
 
     /*
     * LOCKED     任务已锁定
