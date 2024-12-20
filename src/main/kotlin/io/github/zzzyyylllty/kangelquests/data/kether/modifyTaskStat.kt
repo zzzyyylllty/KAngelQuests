@@ -18,14 +18,15 @@ fun parser1() = scriptParser {
                 if (sender.isPlayer()) questsMap[sender as Player]?.quests?.get(q)?.questStat = QuestStat.ACTIVE
             }
         }
-        case("lock", "unaccept", "unactive", "inactive") {
+        case("fail") {
             val q = it.nextToken()
             actionNow {
                 if (script().sender !is Player) return@actionNow null else return@actionNow maniuallyCompleteTask(
-                    "lock",
+                    "fail",
                     nextToken().split(".")[0],
                     nextToken().split(".")[1],
-                    script().sender
+                    script().sender,
+                    false
                 )
             }
         }
@@ -36,22 +37,69 @@ fun parser1() = scriptParser {
                     "complete",
                     nextToken().split(".")[0],
                     nextToken().split(".")[1],
-                    script().sender
+                    script().sender,
+                    false
                 )
             }
         }
-        case("slientcomplete") {
+        case("restart", "reaccept") {
+            val q = it.nextToken()
+            actionNow {
+                if (script().sender !is Player) return@actionNow null else return@actionNow maniuallyCompleteTask(
+                    "restart",
+                    nextToken().split(".")[0],
+                    nextToken().split(".")[1],
+                    script().sender,
+                    true
+                )
+            }
+        }
+
+        case("active-silent", "unlock-silent", "accept-silent") {
             val q = it.nextToken()
             actionNow {
                 val sender = script().sender
-                if (sender.isPlayer() && questsMap[sender as Player]?.quests?.get(q)?.questTasks != null) {
-                    questsMap[sender]?.quests?.get(q)?.questStat = QuestStat.COMPLETED
-                    for (questTask in questsMap[sender]?.quests?.get(q)?.questTasks!!) {
-                        questsMap[sender]?.quests?.get(q)?.questTasks?.get(questTask.key)?.progress =
-                            questTask.value.goal
-                    }
-                }
+                if (sender.isPlayer()) questsMap[sender as Player]?.quests?.get(q)?.questStat = QuestStat.ACTIVE
             }
         }
+        case("fail-silent") {
+            val q = it.nextToken()
+            actionNow {
+                if (script().sender !is Player) return@actionNow null else return@actionNow maniuallyCompleteTask(
+                    "fail",
+                    nextToken().split(".")[0],
+                    nextToken().split(".")[1],
+                    script().sender,
+                    true
+                )
+            }
+        }
+        case("complete-silent", "done-silent", "finish-silent") {
+            val q = it.nextToken()
+            actionNow {
+                if (script().sender !is Player) return@actionNow null else return@actionNow maniuallyCompleteTask(
+                    "complete",
+                    nextToken().split(".")[0],
+                    nextToken().split(".")[1],
+                    script().sender,
+                    true
+                )
+            }
+        }
+
+        case("restart-silent", "reaccept-silent") {
+            val q = it.nextToken()
+            actionNow {
+                if (script().sender !is Player) return@actionNow null else return@actionNow maniuallyCompleteTask(
+                    "fail",
+                    nextToken().split(".")[0],
+                    nextToken().split(".")[1],
+                    script().sender,
+                    true
+                )
+            }
+        }
+
+
     }
 }
