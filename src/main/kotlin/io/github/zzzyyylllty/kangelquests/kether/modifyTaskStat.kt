@@ -1,4 +1,4 @@
-package io.github.zzzyyylllty.kangelquests.data.kether
+package io.github.zzzyyylllty.kangelquests.kether
 
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.questsMap
 import io.github.zzzyyylllty.kangelquests.data.QuestStat

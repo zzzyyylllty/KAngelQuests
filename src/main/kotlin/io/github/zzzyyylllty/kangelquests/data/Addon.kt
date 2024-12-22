@@ -36,5 +36,7 @@ data class Agent(
     val onFail: String?,
     val onAccept: String?,
     val onRestart: String?,
+    val onProgress: String?, // 只适用于task
+    val onProgressFail: String?, // 只适用于task
 )
 

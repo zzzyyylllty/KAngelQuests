@@ -7,6 +7,7 @@ import io.github.zzzyyylllty.kangelquests.data.QuestStat
 import org.bukkit.entity.Player
 import taboolib.common.platform.function.submitAsync
 import taboolib.common.platform.function.warning
+import taboolib.common.util.asList
 import taboolib.platform.util.asLangText
 
 fun completeTasks(p: Player?, objective: ObjectiveType, amount: Number, metaList: LinkedHashMap<String, Any?>) {
@@ -56,21 +57,54 @@ fun completeTasks(p: Player?, objective: ObjectiveType, amount: Number, metaList
                     }
                 }
 
-                // TODO
+                // TODO Task Agent
 
                 for (rawObjective in task.task.taskObjectives)
                     for (meta in rawObjective.meta) {
 
                         // META
-                        if (metaList[meta.key] != meta.value) return@submitAsync
+                        var isTaskMetaTrue = false
+                        if (meta.value is String) isTaskMetaTrue = compare(
+                            meta.value.toString(),
+                            metaList[meta.key].toString(),
+                            p.asLangText(
+                                "DEBUG_META_COMPARE_ERROR",
+                                p.name,
+                                meta.value,
+                                metaList[meta.key] ?: "(null)",
+                                questId,
+                                taskKey
+                            )
+                        )
+                        if (meta.value !is String) isTaskMetaTrue = compare(
+                            meta.value as Double,
+                            metaList[meta.key].toString(),
+                            p.asLangText(
+                                "DEBUG_META_COMPARE_ERROR",
+                                p.name,
+                                meta.value,
+                                metaList[meta.key] ?: "(null)",
+                                questId,
+                                taskKey
+                            )
+                        )
+                        if (!isTaskMetaTrue) {
+                            task.addon.agent.onProgressFail?.asList()?.let { runKether(it, p) }
+                            break
+                        }
 
                         // Kether Requirement
                         if (rawObjective.requirement != null && runKether(
                                 listOf(rawObjective.requirement),
                                 p
                             ).get() as Boolean? == false
-                        ) break
+                        ) {
+                            task.addon.agent.onProgressFail?.asList()?.let { runKether(it, p) }
+                            break
+                        }
 
+                        // Progress added
+                        task.addon.agent.onProgress?.asList()?.let { runKether(it, p) }
                         // Kether run
                         if (rawObjective.run != null) runKether(listOf(rawObjective.run), p).get()
                     }

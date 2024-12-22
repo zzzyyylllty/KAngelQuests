@@ -2,8 +2,10 @@ package io.github.zzzyyylllty.tasks.debugger
 
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.questsMap
 import io.github.zzzyyylllty.kangelquests.data.QuestStat
+import io.github.zzzyyylllty.kangelquests.tasks.runKether
 import org.bukkit.entity.Player
 import taboolib.common.platform.ProxyCommandSender
+import taboolib.common.util.asList
 
 fun maniuallyCompleteTask(action: String, q: String, t: String?, p: ProxyCommandSender?, slient: Boolean): Any {
 
@@ -19,11 +21,11 @@ fun maniuallyCompleteTask(action: String, q: String, t: String?, p: ProxyCommand
                 quest.questStat = QuestStat.COMPLETED
 
                 // Agent
-                if (!slient) quest.addon.agent.onComplete
+                if (!slient) quest.addon.agent.onComplete?.asList()?.let { runKether(it, p) }
 
             } else {
                 quest.questTasks[t]?.progress = quest.questTasks[t]?.goal ?: 1
-                if (!slient) quest.questTasks[t]?.addon?.agent?.onComplete
+                if (!slient) quest.questTasks[t]?.addon?.agent?.onComplete?.asList()?.let { runKether(it, p) }
 
                 return true
             }
@@ -35,19 +37,19 @@ fun maniuallyCompleteTask(action: String, q: String, t: String?, p: ProxyCommand
                     quest.questTasks[questTask.key]?.progress = 0
                 }
                 quest.questStat = QuestStat.ACTIVE
-                if (!slient) quest.addon.agent.onFail
+                if (!slient) quest.addon.agent.onFail?.asList()?.let { runKether(it, p) }
             } else {
 
                 quest.questTasks[t]?.progress =
                     quest.questTasks[t]?.goal ?: 0
-                if (!slient) quest.questTasks[t]?.addon?.agent?.onFail
+                if (!slient) quest.questTasks[t]?.addon?.agent?.onFail?.asList()?.let { runKether(it, p) }
             }
             return true
         }
 
         "accept" -> {
             quest.questStat = QuestStat.ACTIVE
-            if (!slient) quest.addon.agent.onAccept
+            if (!slient) quest.addon.agent.onAccept?.asList()?.let { runKether(it, p) }
             return true
         }
 
@@ -57,12 +59,12 @@ fun maniuallyCompleteTask(action: String, q: String, t: String?, p: ProxyCommand
                     quest.questTasks[questTask.key]?.progress = 0
                 }
                 quest.questStat = QuestStat.ACTIVE
-                if (!slient) quest.addon.agent.onRestart
+                if (!slient) quest.addon.agent.onRestart?.asList()?.let { runKether(it, p) }
             } else {
 
                 quest.questTasks.get(t)?.progress =
                     quest.questTasks.get(t)?.goal ?: 0
-                if (!slient) quest.questTasks[t]?.addon?.agent?.onRestart
+                if (!slient) quest.questTasks[t]?.addon?.agent?.onRestart?.asList()?.let { runKether(it, p) }
             }
             return true
         }

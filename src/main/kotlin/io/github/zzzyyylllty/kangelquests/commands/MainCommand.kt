@@ -1,4 +1,4 @@
-package io.github.zzzyyylllty.kangelquests.data.commands
+package io.github.zzzyyylllty.kangelquests.commands
 
 import io.github.zzzyyylllty.kangelquests.tasks.returnPlayerOnlyTargetSelector
 import org.bukkit.Bukkit
