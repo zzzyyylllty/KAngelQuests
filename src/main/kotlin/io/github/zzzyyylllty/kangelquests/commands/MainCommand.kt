@@ -1,13 +1,13 @@
 package io.github.zzzyyylllty.kangelquests.commands
 
-import io.github.zzzyyylllty.kangelquests.tasks.returnPlayerOnlyTargetSelector
+import io.github.zzzyyylllty.kangelquests.functions.returnPlayerOnlyTargetSelector
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import taboolib.common.platform.command.CommandBody
 import taboolib.common.platform.command.CommandHeader
 import taboolib.common.platform.command.subCommand
-import taboolib.common.platform.function.warning
+import taboolib.platform.util.asLangText
 import taboolib.platform.util.sendLang
 
 @CommandHeader("kangelquests", ["kangelquest", "kq"], permission = "kangelquests.command")
@@ -29,10 +29,11 @@ object MainCommand {
                                     val q = context["players"]
                                     if (context["modify"].startsWith("quest:"))
 
-                                        if (context["modify"].startsWith("task:"))
+                                        if (context["modify"].startsWith("task:")) {
+                                        }
 
                                 } else {
-                                    warning("目标选择器 ${context["players"]} 其中有部分结果不是玩家，已跳过。")
+                                    sender.asLangText("DEBUG_NON_PLAYER_TARGET_SELECTOR", context["players"])
                                 }
                             }
                             sender.sendLang("COMMAND_NO_PARAMS", "modify")

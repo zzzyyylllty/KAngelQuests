@@ -2,7 +2,7 @@ package io.github.zzzyyylllty.tasks.debugger
 
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.questsMap
 import io.github.zzzyyylllty.kangelquests.data.QuestStat
-import io.github.zzzyyylllty.kangelquests.tasks.runKether
+import io.github.zzzyyylllty.kangelquests.functions.runKether
 import org.bukkit.entity.Player
 import taboolib.common.platform.ProxyCommandSender
 import taboolib.common.util.asList

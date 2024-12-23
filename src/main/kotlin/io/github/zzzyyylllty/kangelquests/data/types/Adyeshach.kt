@@ -3,7 +3,7 @@ package io.github.zzzyyylllty.kangelquests.data.types
 import ink.ptms.adyeshach.core.event.AdyeshachEntityInteractEvent
 import io.github.zzzyyylllty.kangelquests.KAngelQuests
 import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
-import io.github.zzzyyylllty.kangelquests.tasks.completeTasks
+import io.github.zzzyyylllty.kangelquests.functions.completeTasks
 import taboolib.common.env.RuntimeDependency
 import taboolib.common.platform.event.SubscribeEvent
 import taboolib.common.platform.function.submitAsync

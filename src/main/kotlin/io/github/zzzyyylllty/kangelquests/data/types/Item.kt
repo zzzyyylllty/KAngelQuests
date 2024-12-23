@@ -2,7 +2,7 @@ package io.github.zzzyyylllty.kangelquests.data.types
 
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.registeredObjectives
 import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
-import io.github.zzzyyylllty.kangelquests.tasks.completeTasks
+import io.github.zzzyyylllty.kangelquests.functions.completeTasks
 import org.bukkit.event.inventory.FurnaceExtractEvent
 import taboolib.common.platform.event.SubscribeEvent
 import taboolib.common.platform.function.submitAsync

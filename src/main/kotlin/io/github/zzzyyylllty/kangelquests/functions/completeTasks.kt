@@ -1,4 +1,4 @@
-package io.github.zzzyyylllty.kangelquests.tasks
+package io.github.zzzyyylllty.kangelquests.functions
 
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.config
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.questsMap
@@ -57,8 +57,6 @@ fun completeTasks(p: Player?, objective: ObjectiveType, amount: Number, metaList
                     }
                 }
 
-                // TODO Task Agent
-
                 for (rawObjective in task.task.taskObjectives)
                     for (meta in rawObjective.meta) {
 
@@ -105,6 +103,7 @@ fun completeTasks(p: Player?, objective: ObjectiveType, amount: Number, metaList
 
                         // Progress added
                         task.addon.agent.onProgress?.asList()?.let { runKether(it, p) }
+
                         // Kether run
                         if (rawObjective.run != null) runKether(listOf(rawObjective.run), p).get()
                     }

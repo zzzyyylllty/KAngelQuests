@@ -1,4 +1,4 @@
-package io.github.zzzyyylllty.kangelquests.tasks
+package io.github.zzzyyylllty.kangelquests.functions
 
 import org.bukkit.Bukkit.getOnlinePlayers
 import java.util.stream.Collectors

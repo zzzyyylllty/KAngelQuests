@@ -1,4 +1,4 @@
-package io.github.zzzyyylllty.kangelquests.tasks
+package io.github.zzzyyylllty.kangelquests.functions
 
 import org.bukkit.entity.Player
 import taboolib.common.platform.function.adaptCommandSender

@@ -3,7 +3,7 @@ package io.github.zzzyyylllty.data.types
 
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.registeredObjectives
 import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
-import io.github.zzzyyylllty.kangelquests.tasks.completeTasks
+import io.github.zzzyyylllty.kangelquests.functions.completeTasks
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent
 import io.lumine.mythic.bukkit.events.MythicMobInteractEvent
 import org.bukkit.entity.Player

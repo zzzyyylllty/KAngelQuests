@@ -2,7 +2,7 @@ package io.github.zzzyyylllty.kangelquests.data.types
 
 import io.github.zzzyyylllty.kangelquests.KAngelQuests.registeredObjectives
 import io.github.zzzyyylllty.kangelquests.data.ObjectiveType
-import io.github.zzzyyylllty.kangelquests.tasks.completeTasks
+import io.github.zzzyyylllty.kangelquests.functions.completeTasks
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.player.AsyncPlayerChatEvent
