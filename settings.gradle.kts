@@ -1,1 +1,1 @@
-rootProject.name = "KAngelQuests"
+rootProject.name = "Zaleplon"
