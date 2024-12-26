@@ -1,7 +1,6 @@
 package io.github.zzzyyylllty.zaleplon.data.types
 
 import io.github.zzzyyylllty.zaleplon.Zaleplon.registeredObjectives
-import io.github.zzzyyylllty.zaleplon.data.ObjectiveType
 import io.github.zzzyyylllty.zaleplon.functions.completeTasks
 import org.bukkit.event.inventory.FurnaceExtractEvent
 import taboolib.common.platform.event.SubscribeEvent
@@ -11,7 +10,7 @@ object Item {
 
     @SubscribeEvent
     fun onItemFurnace(e: FurnaceExtractEvent) {
-        if (registeredObjectives.contains(ObjectiveType.ITEM_FURNACE))
+        if (registeredObjectives.contains("ITEM_FURNACE"))
             onItemFurnace1(e)
     }
 
@@ -29,7 +28,7 @@ object Item {
             metaList["PZ:NUMBER"] = p.location.z
             metaList["ITEMSTACK:MATERIAL"] = e.itemType
             metaList["EXP:NUMBER"] = e.expToDrop
-            completeTasks(p, ObjectiveType.ITEM_FURNACE, e.itemAmount, metaList)
+            completeTasks(p, "ITEM_FURNACE", e.itemAmount, metaList)
 
         }
     }

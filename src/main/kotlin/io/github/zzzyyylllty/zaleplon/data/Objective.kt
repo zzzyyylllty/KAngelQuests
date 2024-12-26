@@ -8,7 +8,7 @@ data class Objective(
     * Meta            目标元数据，形如 Key:"BLOCK" Value:"COAL_ORE" 。
     *
     * */
-    val objective: ObjectiveType,
+    val objective: String,
     val meta: LinkedHashMap<String, Any>,
     val requirement: String?,
     val run: String?,

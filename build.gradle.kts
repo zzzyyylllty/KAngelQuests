@@ -49,10 +49,20 @@ repositories {
         name = "mythicmobs"
         url = uri("https://mvn.lumine.io/repository/maven-public/")
     }
+    maven {
+        name = "citizens-repo"
+        url = uri("https://maven.citizensnpcs.co/repo")
+    }
+
+    maven {
+        url = uri("https://repo.extendedclip.com/content/repositories/placeholderapi/")
+    }
+
     mavenCentral()
 }
-
 dependencies {
+    compileOnly("net.citizensnpcs:citizens-main:2.0.35-SNAPSHOT")
+    implementation("me.clip:placeholderapi:2.11.5")
     compileOnly("ink.ptms.adyeshach:api:2.0.19")
     compileOnly("ink.ptms.core:v12004:12004:mapped")
     compileOnly("ink.ptms.core:v12004:12004:universal")

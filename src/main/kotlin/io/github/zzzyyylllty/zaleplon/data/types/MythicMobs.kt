@@ -2,7 +2,6 @@ package io.github.zzzyyylllty.data.types
 
 
 import io.github.zzzyyylllty.zaleplon.Zaleplon.registeredObjectives
-import io.github.zzzyyylllty.zaleplon.data.ObjectiveType
 import io.github.zzzyyylllty.zaleplon.functions.completeTasks
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent
 import io.lumine.mythic.bukkit.events.MythicMobInteractEvent
@@ -17,7 +16,7 @@ object MythicMobs {
     private var metaList = LinkedHashMap<String, Any?>()
     @SubscribeEvent
     fun onMythicMobsMobKill(e: MythicMobDeathEvent) {
-        if (registeredObjectives.contains(ObjectiveType.MYTHICMOBS_KILL))
+        if (registeredObjectives.contains("MYTHICMOBS_KILL"))
             onMythicMobsMobKill1(e)
     }
 
@@ -33,14 +32,14 @@ object MythicMobs {
                 metaList["PX:NUMBER"] = p.location.x
                 metaList["PY:NUMBER"] = p.location.y
                 metaList["PZ:NUMBER"] = p.location.z
-                completeTasks(p, ObjectiveType.MYTHICMOBS_KILL, 1, metaList)
+                completeTasks(p, "MYTHICMOBS_KILL", 1, metaList)
             }
         }
     }
 
     @SubscribeEvent
     fun onMythicMobsMobInteract(e: MythicMobInteractEvent) {
-        if (registeredObjectives.contains(ObjectiveType.MYTHICMOBS_INTERACT))
+        if (registeredObjectives.contains("MYTHICMOBS_INTERACT"))
             onMythicMobsMobInteract1(e)
     }
 
@@ -55,7 +54,7 @@ object MythicMobs {
             metaList["PX:NUMBER"] = p.location.x
             metaList["PY:NUMBER"] = p.location.y
             metaList["PZ:NUMBER"] = p.location.z
-            completeTasks(p, ObjectiveType.MYTHICMOBS_INTERACT, 1, metaList)
+            completeTasks(p, "MYTHICMOBS_INTERACT", 1, metaList)
         }
     }
 }

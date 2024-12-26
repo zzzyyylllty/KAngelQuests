@@ -1,6 +1,5 @@
 package io.github.zzzyyylllty.zaleplon
 
-import io.github.zzzyyylllty.zaleplon.data.ObjectiveType
 import io.github.zzzyyylllty.zaleplon.data.PlayerQuestData
 import io.github.zzzyyylllty.zaleplon.data.Quest
 import org.bukkit.entity.Player
@@ -15,8 +14,8 @@ object Zaleplon : Plugin() {
 
     lateinit var plugin: Zaleplon
     lateinit var questsMap: LinkedHashMap<Player, PlayerQuestData>
-    lateinit var registeredObjectives: ArrayList<ObjectiveType>
-    lateinit var runningObjectives: ArrayList<ObjectiveType>
+    lateinit var registeredObjectives: ArrayList<String>
+    lateinit var runningObjectives: ArrayList<String>
     lateinit var loadedQuests: LinkedHashMap<String, Quest>
     var console = console()
 

@@ -3,9 +3,9 @@ package io.github.zzzyyylllty.zaleplon.data
 import org.bukkit.Material
 
 data class Addon(
-    val gui: AddonGui,
-    val dependency: ArrayList<AddonDependencySingle>,
-    val agent: Agent,
+    val gui: AddonGui?,
+    val dependency: ArrayList<AddonDependencySingle>?,
+    val agent: Agent?,
 )
 
 data class AddonGui(

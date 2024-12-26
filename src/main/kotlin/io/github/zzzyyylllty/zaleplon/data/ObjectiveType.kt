@@ -1,6 +1,7 @@
 package io.github.zzzyyylllty.zaleplon.data
 
-
+// 已不再使用
+/*
 enum class ObjectiveType /* (metaSections: List<String>?) */ {
     /*
     * ObjectiveType 没有 display
@@ -62,4 +63,4 @@ enum class ObjectiveType /* (metaSections: List<String>?) */ {
     CITIZENS_INTERACT
 
 
-}
+}*/

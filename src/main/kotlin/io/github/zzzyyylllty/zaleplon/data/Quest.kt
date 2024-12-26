@@ -1,7 +1,7 @@
 package io.github.zzzyyylllty.zaleplon.data
 
 
-enum class Quest(
+data class Quest(
 
     /*
     * 静态任务
@@ -14,10 +14,10 @@ enum class Quest(
     *
     * */
     var questDisplayName: String?,
-    var questDisplayLore: String?,
+    var questDisplayLore: List<String>?,
     var questDifficulty: String,
-    var questCategory: ArrayList<String>?,
+    var questCategory: List<String>?,
     var questMetas: LinkedHashMap<String, Any>,
     var questTasks: LinkedHashMap<String, Task>,
-    var addon: Addon,
+    var addon: Addon?,
 )

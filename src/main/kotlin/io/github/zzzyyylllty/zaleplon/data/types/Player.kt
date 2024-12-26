@@ -1,7 +1,6 @@
 package io.github.zzzyyylllty.zaleplon.data.types
 
 import io.github.zzzyyylllty.zaleplon.Zaleplon.registeredObjectives
-import io.github.zzzyyylllty.zaleplon.data.ObjectiveType
 import io.github.zzzyyylllty.zaleplon.functions.completeTasks
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDeathEvent
@@ -19,7 +18,7 @@ object Player {
 
     @SubscribeEvent
     fun onPlayerFish(e: PlayerFishEvent) {
-        if (registeredObjectives.contains(ObjectiveType.PLAYER_FISH))
+        if (registeredObjectives.contains("PLAYER_FISH"))
             onPlayerFish1(e)
     }
 
@@ -32,13 +31,13 @@ object Player {
             metaList["PY:NUMBER"] = p.location.y
             metaList["PZ:NUMBER"] = p.location.z
             metaList["HAND:EQUIPMENTSLOT"] = e.hand?.name
-            completeTasks(p, ObjectiveType.PLAYER_FISH, 1, metaList)
+            completeTasks(p, "PLAYER_FISH", 1, metaList)
         }
     }
 
     @SubscribeEvent
     fun onPlayerChat(e: AsyncPlayerChatEvent) {
-        if (registeredObjectives.contains(ObjectiveType.PLAYER_CHAT))
+        if (registeredObjectives.contains("PLAYER_CHAT"))
             onPlayerChat1(e)
     }
 
@@ -50,13 +49,13 @@ object Player {
             metaList["PX:NUMBER"] = p.location.x
             metaList["PY:NUMBER"] = p.location.y
             metaList["PZ:NUMBER"] = p.location.z
-            completeTasks(p, ObjectiveType.PLAYER_CHAT, 1, metaList)
+            completeTasks(p, "PLAYER_CHAT", 1, metaList)
         }
     }
 
     @SubscribeEvent
     fun onPlayerSyncChat(e: PlayerChatEvent) {
-        if (registeredObjectives.contains(ObjectiveType.PLAYER_SYNCCHAT))
+        if (registeredObjectives.contains("PLAYER_SYNCCHAT"))
             onPlayerSyncChat1(e)
     }
 
@@ -68,13 +67,13 @@ object Player {
             metaList["PX:NUMBER"] = p.location.x
             metaList["PY:NUMBER"] = p.location.y
             metaList["PZ:NUMBER"] = p.location.z
-            completeTasks(p, ObjectiveType.PLAYER_SYNCCHAT, 1, metaList)
+            completeTasks(p, "PLAYER_SYNCCHAT", 1, metaList)
         }
     }
 
     @SubscribeEvent
     fun onPlayerChangeWorld(e: PlayerChangedWorldEvent) {
-        if (registeredObjectives.contains(ObjectiveType.PLAYER_CHANGEWORLD))
+        if (registeredObjectives.contains("PLAYER_CHANGEWORLD"))
             onPlayerChangeWorld1(e)
     }
 
@@ -86,13 +85,13 @@ object Player {
             metaList["PX:NUMBER"] = p.location.x
             metaList["PY:NUMBER"] = p.location.y
             metaList["PZ:NUMBER"] = p.location.z
-            completeTasks(p, ObjectiveType.PLAYER_CHANGEWORLD, 1, metaList)
+            completeTasks(p, "PLAYER_CHANGEWORLD", 1, metaList)
         }
     }
 
     @SubscribeEvent
     fun onPlayerKillMob(e: EntityDeathEvent) {
-        if (e.killer is Player && registeredObjectives.contains(ObjectiveType.PLAYER_KILLMOB))
+        if (e.killer is Player && registeredObjectives.contains("PLAYER_KILLMOB"))
             onPlayerKillMob1(e)
     }
 
@@ -104,7 +103,7 @@ object Player {
             metaList["PX:NUMBER"] = p.location.x
             metaList["PY:NUMBER"] = p.location.y
             metaList["PZ:NUMBER"] = p.location.z
-            completeTasks(p, ObjectiveType.PLAYER_KILLMOB, 1, metaList)
+            completeTasks(p, "PLAYER_KILLMOB", 1, metaList)
         }
     }
 

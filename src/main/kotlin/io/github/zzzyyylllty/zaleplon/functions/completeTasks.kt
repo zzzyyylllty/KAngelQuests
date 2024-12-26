@@ -2,7 +2,6 @@ package io.github.zzzyyylllty.zaleplon.functions
 
 import io.github.zzzyyylllty.zaleplon.Zaleplon.config
 import io.github.zzzyyylllty.zaleplon.Zaleplon.questsMap
-import io.github.zzzyyylllty.zaleplon.data.ObjectiveType
 import io.github.zzzyyylllty.zaleplon.data.QuestStat
 import org.bukkit.entity.Player
 import taboolib.common.platform.function.submitAsync
@@ -10,7 +9,7 @@ import taboolib.common.platform.function.warning
 import taboolib.common.util.asList
 import taboolib.platform.util.asLangText
 
-fun completeTasks(p: Player?, objective: ObjectiveType, amount: Number, metaList: LinkedHashMap<String, Any?>) {
+fun completeTasks(p: Player?, objective: String, amount: Number, metaList: LinkedHashMap<String, Any?>) {
 
     if (p == null) return
 

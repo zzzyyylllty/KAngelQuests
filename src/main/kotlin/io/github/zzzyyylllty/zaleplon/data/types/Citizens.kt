@@ -1,22 +1,21 @@
 package io.github.zzzyyylllty.zaleplon.data.types
 
-import ink.ptms.adyeshach.core.event.AdyeshachEntityInteractEvent
 import io.github.zzzyyylllty.zaleplon.Zaleplon
 import io.github.zzzyyylllty.zaleplon.functions.completeTasks
 import taboolib.common.env.RuntimeDependency
 import taboolib.common.platform.event.SubscribeEvent
 import taboolib.common.platform.function.submitAsync
 
-@RuntimeDependency("Adyeshach")
-object AdyeshachQuests {
+@RuntimeDependency("Citizens")
+object CitizensQuests {
 
     @SubscribeEvent                                                                       // =EventHandler+RegisterEvents
-    fun onAdyeshachNPCInteract(e: AdyeshachEntityInteractEvent) {
-        if (Zaleplon.registeredObjectives.contains("ADYESHACH_INTERACT")) // If registered objects contains it
-            onAdyeshachNPCInteract1(e)                                                    // Do
+    fun onCitizensNPCInteract(e: C) {
+        if (Zaleplon.registeredObjectives.contains("Citizens_INTERACT")) // If registered objects contains it
+            onCitizensNPCInteract1(e)                                                    // Do
     }
 
-    private fun onAdyeshachNPCInteract1(e: AdyeshachEntityInteractEvent) {
+    private fun onCitizensNPCInteract1(e: CitizensEntityInteractEvent) {
 
         // Send BukkitRunnable
         submitAsync {
@@ -29,7 +28,7 @@ object AdyeshachQuests {
             metaList["PX:NUMBER"] = p.location.x
             metaList["PY:NUMBER"] = p.location.y
             metaList["PZ:NUMBER"] = p.location.z
-            completeTasks(p, "ADYESHACH_INTERACT", 1, metaList)
+            completeTasks(p, "Citizens_INTERACT", 1, metaList)
         }
     }
 }
