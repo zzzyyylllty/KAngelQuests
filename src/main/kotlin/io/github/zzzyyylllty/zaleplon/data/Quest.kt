@@ -13,7 +13,8 @@ enum class Quest(
     *
     *
     * */
-    var questId: String,
+    var questDisplayName: String?,
+    var questDisplayLore: String?,
     var questDifficulty: String,
     var questCategory: ArrayList<String>?,
     var questMetas: LinkedHashMap<String, Any>,

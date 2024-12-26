@@ -19,7 +19,7 @@ object Item {
         submitAsync {
             val metaList = LinkedHashMap<String, Any?>()
             val p = e.player
-            val block = e.block ?: return@submitAsync
+            val block = e.block
             metaList["BLOCK:MATERIAL"] = e.block.type
             metaList["X:NUMBER"] = e.block.location.x
             metaList["Y:NUMBER"] = e.block.location.y

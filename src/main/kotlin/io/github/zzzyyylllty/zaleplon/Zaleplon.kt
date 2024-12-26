@@ -3,13 +3,13 @@ package io.github.zzzyyylllty.zaleplon
 import io.github.zzzyyylllty.zaleplon.data.ObjectiveType
 import io.github.zzzyyylllty.zaleplon.data.PlayerQuestData
 import io.github.zzzyyylllty.zaleplon.data.Quest
-import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import taboolib.common.platform.Plugin
+import taboolib.common.platform.function.console
 import taboolib.common.platform.function.info
 import taboolib.module.configuration.Config
 import taboolib.module.configuration.ConfigFile
-import taboolib.platform.util.asLangText
+import taboolib.module.lang.asLangText
 
 object Zaleplon : Plugin() {
 
@@ -18,7 +18,7 @@ object Zaleplon : Plugin() {
     lateinit var registeredObjectives: ArrayList<ObjectiveType>
     lateinit var runningObjectives: ArrayList<ObjectiveType>
     lateinit var loadedQuests: LinkedHashMap<String, Quest>
-    var console = Bukkit.getConsoleSender()
+    var console = console()
 
     @Config("config.yml")
     lateinit var config: ConfigFile

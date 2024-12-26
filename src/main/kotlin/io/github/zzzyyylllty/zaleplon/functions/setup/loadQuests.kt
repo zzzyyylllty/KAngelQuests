@@ -1,23 +1,21 @@
 package io.github.zzzyyylllty.zaleplon.functions.setup
 
-import io.github.zzzyyylllty.zaleplon.Zaleplon
+import io.github.zzzyyylllty.zaleplon.Zaleplon.console
 import io.github.zzzyyylllty.zaleplon.Zaleplon.loadedQuests
-import io.github.zzzyyylllty.zaleplon.data.Addon
-import io.github.zzzyyylllty.zaleplon.data.Quest
-import io.github.zzzyyylllty.zaleplon.data.Task
+import io.github.zzzyyylllty.zaleplon.data.*
 import org.bukkit.configuration.file.YamlConfiguration
 import taboolib.common.platform.function.getDataFolder
 import taboolib.common.platform.function.info
 import taboolib.common.platform.function.releaseResourceFile
 import taboolib.common.util.asList
-import taboolib.platform.util.asLangText
+import taboolib.module.lang.asLangText
 import java.io.File
 
 fun loadQuests() {
-    info(Zaleplon.console.asLangText("LOG_READ_QUEST_START"))
+    info(console.asLangText("LOG_READ_QUEST_START"))
 
     val files = File(getDataFolder(), "quests").listFiles() ?: run {
-        info(Zaleplon.console.asLangText("LOG_READ_QUEST_START"))
+        info(console.asLangText("LOG_READ_QUEST_START"))
         return
     }
 
@@ -52,12 +50,39 @@ fun loadSingleQuestFile(file: File) {
         val questCategory = config["quest.meta.category"]?.asList()
         val questTasks = LinkedHashMap<String, Task>()
         val questMetas = LinkedHashMap<String, Any>()
+        val loadedTasks = ArrayList<String>()
 
         for (nodes in keys) {
             if (nodes.split(".").size == 3 && nodes.split(".")[1] == "meta" && nodes.split(".")[0] == quest) {
                 questMetas[nodes.split(".")[2]] = config[nodes.split(".")[2]] ?: "None"
-            } else if (nodes.split(".").size == 3 && nodes.split(".")[1] == "meta" && nodes.split(".")[0] == quest) {
-                questMetas[nodes.split(".")[2]] = config[nodes.split(".")[2]] ?: "None"
+            } else if (nodes.split(".")[1] == "tasks" && nodes.split(".")[0] == quest && loadedTasks.contains(
+                    nodes.split(
+                        "."
+                    )[2]
+                )
+            ) {
+                val taskid = nodes.split(".")[2]
+                loadedTasks.add(taskid)
+                var i = 1
+                val objectives = ArrayList<String>()
+                while (true) {
+                    if (config["$quest.tasks.$taskid.display.objectives.$i"] == null) {
+                        if (i == 1) error(console.asLangText("DEBUG_NO_OBJECTIVES", quest, taskid))
+                        break
+                    }
+
+                    objectives[i] = Objective(
+                        ObjectiveType.valueOf(config["$quest.tasks.$taskid.display.objectives.$i.objective"]),
+                        config["$quest.tasks.$taskid.display.objectives.$i.meta"]
+                    )
+                    i++
+                }
+
+                questTasks[taskid] = Task(
+                    config["$quest.tasks.$taskid.display.taskname"].toString(),
+                    config["$quest.tasks.$taskid.display.tasklore"].toString(), // TODO TASKLORE: AUTO
+                    config["$quest.description"].toString(),
+                )
             }
         }
 
@@ -65,7 +90,8 @@ fun loadSingleQuestFile(file: File) {
 
 
         loadedQuests[quest] = Quest(
-            quest,
+            config["$quest.name"].toString(),
+            config["$quest.description"].toString(),
 
             )
 

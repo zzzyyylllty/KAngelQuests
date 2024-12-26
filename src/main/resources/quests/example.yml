@@ -55,52 +55,53 @@ TestQuest:
     1: # 自由定义
       display:
         taskname: '破坏钻石块'
-        objectives: # 可填写多个任务
-          - objective: BLOCK_BREAK
-            meta:
-              block: DIAMOND_BLOCK
-              # exp: '>= 1'
-              # 子任务 META 决定了子任务的选项和参数
-              # 只有当事件的 META 与任务匹配时才可推进进度
-              # 例如 BLOCK_BREAK 的 META 有三个: "BLOCK:MATERIAL","LOCATION:LOCATION","EXP:INT"
-              # 其中 : 前面的为 META 名称。在此处使用 META 名称来设置任务要求。
-              # 此处即为 破坏 10 个 为 "COAL_ORE" 的方块，且方块的经验数量 >= 1。
-              # 可用的运算符 == != >= <= > < .. 不填写默认为 ==
-              # 其中，非数字类型只可使用 != ==
-              # 例如 >= 7, 1..3
-              requirements: check 1 == 1 # kether要求
-              run: tell "Break!" # 任务进度触发增长时执行的kether
-        amount: 10 # 达成目标需要的数量
-        component:
-          gui:
-            material: GOLD_INGOT # 覆盖默认 Component GUI
-          extra:
-            force-complete:
-              kether: check papi %player_name% is "Ame-Chan" # 当满足某个Kether条件后强制完成任务
-              slient: false # 静默完成，true则不触发agent
-            force-restart:
-              kether: ~ # 等同于 Chemdah 的重置
-              slient: false
-            force-fail: ~
-          dependency:
-            1: # 需要按照顺序，1起数
-              conditions:
-                - operator: '>='
-                  value: '1'
-              quests:
-                - "AnotherQuest.1" # AnotherQuest 的 第一个子任务，使用 0 来代表整个任务
-                - "AnotherAnotherQuest.0" # AnotherAnotherQuest 整个完成
-                - "META.Internet:Saiko" # Internet 为 自定义数据
+        tasklore: auto # 为 auto 自动生成
+      objectives: # 可填写多个任务
+        1:
+          objective: BLOCK_BREAK
+          meta:
+            block: DIAMOND_BLOCK
+            # exp: '>= 1'
+            # 子任务 META 决定了子任务的选项和参数
+            # 只有当事件的 META 与任务匹配时才可推进进度
+            # 例如 BLOCK_BREAK 的 META 有三个: "BLOCK:MATERIAL","LOCATION:LOCATION","EXP:INT"
+            # 其中 : 前面的为 META 名称。在此处使用 META 名称来设置任务要求。
+            # 此处即为 破坏 10 个 为 "COAL_ORE" 的方块，且方块的经验数量 >= 1。            # 可用的运算符 == != >= <= > < .. 不填写默认为 ==
+            # 其中，非数字类型只可使用 != ==
+            # 例如 >= 7, 1..3
+          requirements: check 1 == 1 # kether要求
+          run: tell "Break!" # 任务进度触发增长时执行的kether
+      amount: 10 # 达成目标需要的数量
+      component:
+        gui:
+          material: GOLD_INGOT # 覆盖默认 Component GUI
+        extra:
+          force-complete:
+            kether: check papi %player_name% is "Ame-Chan" # 当满足某个Kether条件后强制完成任务
+            slient: false # 静默完成，true则不触发agent
+          force-restart:
+            kether: ~ # 等同于 Chemdah 的重置
+            slient: false
+          force-fail: ~
+        dependency:
+          1: # 需要按照顺序，1起数
+            conditions:
+              - operator: '>='
+                value: '1'
+            quests:
+              - "AnotherQuest.1" # AnotherQuest 的 第一个子任务，使用 0 来代表整个任务
+              - "AnotherAnotherQuest.0" # AnotherAnotherQuest 整个完成
+              - "META.Internet:Saiko" # Internet 为 自定义数据
           # 需要特定的任务满足条件
           # 目前即 在给定的两个任务中完成 >= 1 个
           # 可用运算符 >= == <= > < !=
           # 可以使用 "META.Difficulty:XXX,TEST_CUSTOM_DATA:XXX,Category:XXX" 按照难度，分类或者additional-data筛选
-          ketheragent:
-            on-accept: 'tell 已开始子任务:%task_name%!'
-            on-complete: 'tell %task_name% 已完成!'
-            on-fail: ~
-            on-restart: ~
-            on-progress: ~ # 仅 task
-            on-progress-fail: ~ # 仅 task
+        ketheragent:
+          on-accept: 'tell 已开始子任务:%task_name%!'
+          on-complete: 'tell %task_name% 已完成!'
+          on-fail: ~
+          on-restart: ~
+          on-progress: ~ # 仅 task
+          on-progress-fail: ~ # 仅 task
 
 
