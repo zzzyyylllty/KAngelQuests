@@ -121,7 +121,8 @@ fun loadSingleQuestFile(file: File) {
                 questMetas,
                 questTasks,
                 null
-            ), null
+            ),
+            null, null,
         )
 
 

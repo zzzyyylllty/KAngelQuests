@@ -33,7 +33,7 @@ taboolib {
         install(Kether)
 
     }
-    version { taboolib = "6.2.0-beta20" }
+    version { taboolib = "6.2.0" }
 }
 
 repositories {
@@ -68,7 +68,7 @@ dependencies {
     compileOnly("ink.ptms.core:v12004:12004:universal")
     compileOnly(kotlin("stdlib"))
     compileOnly(fileTree("libs"))
-    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     compileOnly("io.lumine:Mythic-Dist:5.6.1")
 
 }

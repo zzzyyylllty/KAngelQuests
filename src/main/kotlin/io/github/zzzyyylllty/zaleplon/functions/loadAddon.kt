@@ -4,10 +4,11 @@ import io.github.zzzyyylllty.zaleplon.data.*
 import me.clip.placeholderapi.PlaceholderAPI
 import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.inventory.ItemStack
 
-fun loadAddon(config: YamlConfiguration, quest: Quest, task: Task?): Addon {
+fun loadAddon(config: YamlConfiguration, quest: Quest, task: Task?, taskid: String?): Addon {
 
-    val gui: AddonGui? = null
+    var gui: AddonGui? = null
     val dependency: ArrayList<AddonDependencySingle>? = null
     val agent: Agent? = null
 
@@ -29,10 +30,11 @@ fun loadAddon(config: YamlConfiguration, quest: Quest, task: Task?): Addon {
         return returns
     }
 
+
     if (task == null) {
         gui = AddonGui(
-            Material.valueOf()
-            val nameStandard : String ?,
+            ItemStack(Material.valueOf(config["$quest.addon.gui.material"].toString())).,
+            config["$quest.addon.gui.material"].toString(),
         val nameProgressing: String?,
         val nameTracking: String?,
         val nameCompleted: String?,

@@ -1,6 +1,6 @@
 package io.github.zzzyyylllty.zaleplon.data
 
-import org.bukkit.Material
+import org.bukkit.inventory.ItemStack
 
 data class Addon(
     val gui: AddonGui?,
@@ -9,7 +9,7 @@ data class Addon(
 )
 
 data class AddonGui(
-    val material: Material?,
+    val material: ItemStack?,
     val nameStandard: String?,
     val nameProgressing: String?,
     val nameTracking: String?,
