@@ -2,6 +2,7 @@ package io.github.zzzyyylllty.zaleplon
 
 import io.github.zzzyyylllty.zaleplon.data.ObjectiveType
 import io.github.zzzyyylllty.zaleplon.data.PlayerQuestData
+import io.github.zzzyyylllty.zaleplon.data.Quest
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import taboolib.common.platform.Plugin
@@ -16,6 +17,7 @@ object Zaleplon : Plugin() {
     lateinit var questsMap: LinkedHashMap<Player, PlayerQuestData>
     lateinit var registeredObjectives: ArrayList<ObjectiveType>
     lateinit var runningObjectives: ArrayList<ObjectiveType>
+    lateinit var loadedQuests: LinkedHashMap<String, Quest>
     var console = Bukkit.getConsoleSender()
 
     @Config("config.yml")

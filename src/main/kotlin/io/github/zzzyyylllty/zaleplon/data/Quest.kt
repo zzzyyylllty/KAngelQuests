@@ -15,7 +15,7 @@ enum class Quest(
     * */
     var questId: String,
     var questDifficulty: String,
-    var questCategory: String,
+    var questCategory: ArrayList<String>?,
     var questMetas: LinkedHashMap<String, Any>,
     var questTasks: LinkedHashMap<String, Task>,
     var addon: Addon,
