@@ -2,7 +2,10 @@ package io.github.zzzyyylllty.zaleplon.functions.setup
 
 import io.github.zzzyyylllty.zaleplon.Zaleplon.console
 import io.github.zzzyyylllty.zaleplon.Zaleplon.loadedQuests
-import io.github.zzzyyylllty.zaleplon.data.*
+import io.github.zzzyyylllty.zaleplon.data.Addon
+import io.github.zzzyyylllty.zaleplon.data.Objective
+import io.github.zzzyyylllty.zaleplon.data.Quest
+import io.github.zzzyyylllty.zaleplon.data.Task
 import io.github.zzzyyylllty.zaleplon.functions.loadAddon
 import org.bukkit.configuration.file.YamlConfiguration
 import taboolib.common.platform.function.getDataFolder
@@ -30,11 +33,11 @@ fun loadQuests() {
             loadSingleQuestFile(file)
             info("正在处理任务文件 ${file.getName()} ... 完成.")
         } catch (exception: IllegalArgumentException) {
-            info("处理任务文件 ${file.getName()} 时发生意外错误 \n Stacktrace: $exception")
+            error("处理任务文件 ${file.getName()} 时发生意外错误 \n Stacktrace: $exception")
         }
     }
 
-    info("任务加载完成! LOOTLIST:${lootList} LOOTINSTANCE${lootInstanceList}")
+    info("任务加载完成!")
 }
 
 

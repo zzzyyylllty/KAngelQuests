@@ -27,7 +27,6 @@ TestQuest:
         standard: '{name}'
         completed: '{name} &a(已完成)'
         tracking: '{name} &6(追踪中)'
-        progressing: '{name} &6(进行中)'
       # 可选项，GUI 任务描述，不填写则使用任务描述
       display-lore:
         standard:
@@ -38,10 +37,10 @@ TestQuest:
         tracking:
           - '追踪中!'
           - '{description}'
-        progressing:
-          - '进行中!'
-          - '{description}'
-      show: true        # 该任务是否在 GUI 中显示? 如果为 false 不在 GUI 中显示这个任务
+      show:
+        before: true        # 该任务在开始前是否在 GUI 中显示? 如果为 false 不在 GUI 中显示这个任务
+        progressing: true        # 该任务在激活中是否在 GUI 中显示? 如果为 false 不在 GUI 中显示这个任务
+        completed: true        # 该任务在完成后是否在 GUI 中显示? 如果为 false 不在 GUI 中显示这个任务
     control:
       max-start: 1
       max-complete: 1
@@ -86,8 +85,7 @@ TestQuest:
         dependency:
           1: # 需要按照顺序，1起数
             conditions:
-              - operator: '>='
-                value: '1'
+              - '>= 1'
             quests:
               - "AnotherQuest.1" # AnotherQuest 的 第一个子任务，使用 0 来代表整个任务
               - "AnotherAnotherQuest.0" # AnotherAnotherQuest 整个完成

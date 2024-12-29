@@ -5,6 +5,7 @@ import me.clip.placeholderapi.PlaceholderAPI
 import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.inventory.ItemStack
+import taboolib.common.util.asList
 
 fun loadAddon(config: YamlConfiguration, quest: Quest, task: Task?, taskid: String?): Addon {
 
@@ -34,17 +35,28 @@ fun loadAddon(config: YamlConfiguration, quest: Quest, task: Task?, taskid: Stri
     if (task == null) {
         gui = AddonGui(
             ItemStack(Material.valueOf(config["$quest.addon.gui.material"].toString())).,
-            config["$quest.addon.gui.material"].toString(),
-        val nameProgressing: String?,
-        val nameTracking: String?,
-        val nameCompleted: String?,
-        val loreeStandard: ArrayList<String?>,
-        val loreProgressing: ArrayList<String?>,
-        val loreTracking: ArrayList<String?>,
-        val loreCompleted: ArrayList<String?>,
-        val show: Boolean = false,
+            config["$quest.addon.gui.display-name.standard"].toString(),
+            config["$quest.addon.gui.display-name.tracking"].toString(),
+            config["$quest.addon.gui.display-name.completed"].toString(),
+            config["$quest.addon.gui.display-lore.standard"]?.asList(),
+            config["$quest.addon.gui.display-name.tracking"]?.asList(),
+            config["$quest.addon.gui.display-name.completed"]?.asList(),
+            config["$quest.addon.gui.show.before"].toString().toBoolean(),
+            config["$quest.addon.gui.show.progressing"].toString().toBoolean(),
+            config["$quest.addon.gui.show.completed"].toString().toBoolean(),
         )
+        val i = 1
+        while (config["$quest.addon.dependency"] == null) {
+            dependency?.add(
+                AddonDependencySingle(
+                    config["$quest.addon.dependency.$i.conditions"]?.asList(),
+                    config["$quest.addon.dependency.$i.quests"]?.asList(),
+                )
+            )
+        }
     }
+
+
     return Addon(gui, dependency, agent)
 }
 

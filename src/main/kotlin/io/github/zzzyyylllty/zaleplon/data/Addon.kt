@@ -11,27 +11,32 @@ data class Addon(
 data class AddonGui(
     val material: ItemStack?,
     val nameStandard: String?,
-    val nameProgressing: String?,
     val nameTracking: String?,
     val nameCompleted: String?,
-    val loreeStandard: ArrayList<String?>,
-    val loreProgressing: ArrayList<String?>,
-    val loreTracking: ArrayList<String?>,
-    val loreCompleted: ArrayList<String?>,
-    val show: Boolean = false,
+    val loreeStandard: List<String?>?,
+    val loreTracking: List<String?>?,
+    val loreCompleted: List<String?>?,
+    val showBefore: Boolean?,
+    val showProgressing: Boolean?,
+    val showCompleted: Boolean?,
 )
 
 data class AddonDependencySingle(
-    val conditions: ArrayList<AddonDependencySingleCondition>,
-    val quests: LinkedHashMap<String, Int>,
-)
-
-data class AddonDependencySingleCondition(
-    val dependencyOperator: String?,
-    val value: Int?,
+    val conditions: List<String>?,
+    val quests: List<String>?,
 )
 
 data class Agent(
+    val onComplete: String?,
+    val onFail: String?,
+    val onAccept: String?,
+    val onRestart: String?,
+    val onProgress: String?, // 只适用于task
+    val onProgressFail: String?, // 只适用于task
+)
+
+
+data class Control(
     val onComplete: String?,
     val onFail: String?,
     val onAccept: String?,

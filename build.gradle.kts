@@ -37,6 +37,7 @@ taboolib {
 }
 
 repositories {
+    maven { url = uri("https://repo.pcgamingfreaks.at/repository/maven-everything") }
     maven {
         name = "papermc"
         url = uri("https://repo.papermc.io/repository/maven-public/")
@@ -49,19 +50,19 @@ repositories {
         name = "mythicmobs"
         url = uri("https://mvn.lumine.io/repository/maven-public/")
     }
-    maven {
-        name = "citizens-repo"
-        url = uri("https://maven.citizensnpcs.co/repo")
-    }
 
     maven {
         url = uri("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     }
 
+    maven {
+        name = "citizens-repo"
+        url = uri("https://maven.citizensnpcs.co/repo")
+    }
     mavenCentral()
 }
 dependencies {
-    compileOnly("net.citizensnpcs:citizens-main:2.0.35-SNAPSHOT")
+    compileOnly("public:Citizens:1.0.0")
     implementation("me.clip:placeholderapi:2.11.5")
     compileOnly("ink.ptms.adyeshach:api:2.0.19")
     compileOnly("ink.ptms.core:v12004:12004:mapped")
@@ -84,7 +85,6 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
