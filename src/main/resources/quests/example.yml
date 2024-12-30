@@ -12,7 +12,7 @@ TestQuest:
     difficulty: 'Easy'
     category:
       - Medicinal
-  # component系统，类似 Chemdah 的组件
+  # addon系统，类似 Chemdah 的组件
   addon:
     gui:
       # 任务在 GUI 中的材质
@@ -48,8 +48,8 @@ TestQuest:
     ketheragent:
       on-accept: 'tell 已开始任务:%quest_name%!'
       on-complete: 'tell %quest_name% completed!'
-      on-fail: ~
-      on-restart: ~
+      on-fail: null
+      on-restart: null
   tasks:
     1: # 自由定义
       display:
@@ -71,17 +71,17 @@ TestQuest:
           requirement: check 1 == 1 # kether要求
           run: tell "Break!" # 任务进度触发增长时执行的kether
       amount: 10 # 达成目标需要的数量
-      component:
+      addon:
         gui:
-          material: GOLD_INGOT # 覆盖默认 Component GUI
+          material: GOLD_INGOT # 覆盖默认 addon GUI
         extra:
           force-complete:
             kether: check papi %player_name% is "Ame-Chan" # 当满足某个Kether条件后强制完成任务
-            slient: false # 静默完成，true则不触发agent
+            silent: false # 静默完成，true则不触发agent
           force-restart:
-            kether: ~ # 等同于 Chemdah 的重置
-            slient: false
-          force-fail: ~
+            kether: null # 等同于 Chemdah 的重置
+            silent: false
+          force-fail: null
         dependency:
           1: # 需要按照顺序，1起数
             conditions:
@@ -90,6 +90,7 @@ TestQuest:
               - "AnotherQuest.1" # AnotherQuest 的 第一个子任务，使用 0 来代表整个任务
               - "AnotherAnotherQuest.0" # AnotherAnotherQuest 整个完成
               - "META.Internet:Saiko" # Internet 为 自定义数据
+              - "auto" # 完成本任务的所有前置子任务
           # 需要特定的任务满足条件
           # 目前即 在给定的两个任务中完成 >= 1 个
           # 可用运算符 >= == <= > < !=
@@ -97,9 +98,9 @@ TestQuest:
         ketheragent:
           on-accept: 'tell 已开始子任务:%task_name%!'
           on-complete: 'tell %task_name% 已完成!'
-          on-fail: ~
-          on-restart: ~
-          on-progress: ~ # 仅 task
-          on-progress-fail: ~ # 仅 task
+          on-fail: null
+          on-restart: null
+          on-progress: null # 仅 task
+          on-progress-fail: null # 仅 task
 
 

@@ -62,4 +62,4 @@ private fun onCitizensNPCInteract1(e: NPCDamageByEntityEvent) {
         }
     }
 }
-}
+
